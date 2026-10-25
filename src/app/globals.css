@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Moonlightning";
+  src: url("/fonts/Moonlightning.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Moonlightning";
+  src: url("/fonts/Moonlightning-Italic.woff2") format("woff2");
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
   --color-noche: #1f1346;
   --color-violeta: #683ee6;
@@ -10,6 +22,7 @@
   --color-naranja: #f87f23;
   --color-linea: #e3defa;
 
+  --font-marca: "Moonlightning", "Epilogue Variable", sans-serif;
   --font-sans: "Epilogue Variable", ui-sans-serif, system-ui, sans-serif;
 }
 

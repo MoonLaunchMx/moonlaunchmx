@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <header className="bg-noche">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-          <Link href="/" className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-white">
+          <Link href="/" className="flex items-center gap-2 font-marca text-xl italic text-white">
             <Luna className="size-6 text-turquesa" />
             Moon Launch
           </Link>
