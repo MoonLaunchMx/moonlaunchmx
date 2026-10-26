@@ -8,7 +8,7 @@ Sitio de Moon Launch. Reemplaza el sitio de Hostinger Website Builder.
 - **Tailwind CSS v4**: tokens de marca en `src/app/globals.css` (`@theme`)
 - **Motion**: animaciones que responden a lo que hace el usuario
 - **Epilogue** (variable, servida localmente con `@fontsource`)
-- Deploy en **Vercel**: cada push a `main` va a producción y cada PR genera un preview
+- Deploy en **Cloudflare Workers** con `@opennextjs/cloudflare` (Workers Builds: push a `main` = producción, ramas = preview)
 
 ## Dónde se edita qué
 
@@ -24,14 +24,15 @@ Sitio de Moon Launch. Reemplaza el sitio de Hostinger Website Builder.
 
 ```bash
 npm install
-npm run dev
+npm run dev       # desarrollo
+npm run preview   # probar en el runtime de Workers
+npm run deploy    # desplegar a mano (normalmente lo hace Workers Builds)
 ```
 
 ## Siguiente
 
 - [ ] Guardar cada diagnóstico como lead (Supabase) y avisar por correo (Resend)
 - [ ] Asistente que responde dudas con la info de Moon Launch (AI SDK + Claude)
-- [ ] Logo y fuente Moonlightning en `public/`
 - [ ] Páginas de casos de éxito
 - [ ] Analytics (GA4 `G-Y18PD7J4E8` / GTM `GTM-TCZRC2ZG` del sitio anterior)
-- [ ] Apuntar el DNS de moonlaunch.mx a Vercel
+- [ ] Conectar el repo en Workers Builds y apuntar moonlaunch.mx al Worker

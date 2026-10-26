@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Diagnostico from "@/components/Diagnostico";
+import LogoExe from "@/components/LogoExe";
 import { contacto, linkWhatsApp, pasos, servicios } from "@/lib/site";
 
 function Luna({ className = "" }: { className?: string }) {
@@ -17,11 +17,8 @@ export default function Home() {
   return (
     <>
       <header className="bg-noche">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-          <Link href="/" className="flex items-center gap-2 font-marca text-xl italic text-white">
-            <Luna className="size-6 text-turquesa" />
-            Moon Launch
-          </Link>
+        <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8">
+          <LogoExe />
           <a
             href={waHola}
             target="_blank"
