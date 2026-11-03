@@ -1,6 +1,8 @@
+import CalculadoraCaos from "@/components/CalculadoraCaos";
 import Header from "@/components/Header";
 import MoonOS from "@/components/MoonOS";
 import OperacionSwitch from "@/components/OperacionSwitch";
+import Simplificamos from "@/components/Simplificamos";
 import { datos, dolores, modalidades, waAgendar } from "@/lib/site";
 
 const contenedor = "mx-auto max-w-2xl px-4";
@@ -26,6 +28,10 @@ export default function Home() {
           </a>
         </section>
 
+        <section className={`${contenedor} pb-10`} aria-labelledby="simplificamos">
+          <Simplificamos />
+        </section>
+
         <section className={`${contenedor} flex flex-col gap-[18px] pb-10`} aria-labelledby="te-suena">
           <h2 id="te-suena" className="titulo-seccion">
             ¿Te suena?
@@ -40,11 +46,18 @@ export default function Home() {
           <OperacionSwitch />
         </section>
 
+        <section className={`${contenedor} flex flex-col gap-3.5 pb-12`} aria-labelledby="caos">
+          <h2 id="caos" className="titulo-seccion">
+            ¿Cuánto te cuesta el caos?
+          </h2>
+          <CalculadoraCaos />
+        </section>
+
         <section className={`${contenedor} flex flex-col gap-3.5 pb-12`} aria-labelledby="os">
           <h2 id="os" className="titulo-seccion scroll-mt-4">
             Cuéntanos tu caso.
           </h2>
-          <p className="m-0 text-base text-tinta/70">5 preguntas. 1 minuto.</p>
+          <p className="m-0 text-base text-tinta/70">3 preguntas. 1 minuto.</p>
           <MoonOS />
         </section>
 

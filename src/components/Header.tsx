@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Logo from "@/components/Logo";
 import { menu, waAgendar } from "@/lib/site";
 
-const pildoraBtn = "nin flex min-h-10 items-center rounded-full px-3.5 text-sm font-extrabold";
+const pildoraBtn = "nin flex min-h-10 items-center rounded-[6px] px-3.5 text-sm font-extrabold";
 
 /** Navbar en píldora flotante arriba (aprobado 2 nov 2026). */
 export default function Header({ volverA }: { volverA?: { href: string; label: string } }) {
@@ -22,7 +22,7 @@ export default function Header({ volverA }: { volverA?: { href: string; label: s
 
   return (
     <header className="sticky top-2.5 z-30 mx-auto mt-2.5 max-w-2xl px-2.5">
-      <div className="flex items-center justify-between gap-2 rounded-full border-2 border-tinta bg-blanco py-1.5 pr-1.5 pl-2.5 shadow-[0_4px_0_var(--color-tinta)]">
+      <div className="flex items-center justify-between gap-2 rounded-[6px] border-2 border-tinta bg-blanco py-1.5 pr-1.5 pl-2.5 shadow-[0_4px_0_var(--color-tinta)]">
         <Logo />
         <div className="flex items-center gap-1.5 pb-[5px]">
           <a href={waAgendar} target="_blank" rel="noopener noreferrer" className={`${pildoraBtn} bg-violeta text-blanco`}>

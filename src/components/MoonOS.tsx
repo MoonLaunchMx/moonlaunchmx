@@ -16,37 +16,16 @@ const apps: { id: App; label: string; titulo: string; icono: string; turquesa?: 
 const chip = "nin mb-[5px] inline-flex min-h-11 items-center rounded-full px-3.5 text-[15px] font-semibold";
 const h3 = "m-0 text-[22px] leading-[1.1] font-extrabold";
 
-function Contador({ valor, onMenos, onMas, etiqueta }: { valor: number; onMenos: () => void; onMas: () => void; etiqueta: string }) {
-  const btn = "nin mb-[5px] grid size-12 place-items-center rounded-[6px] bg-blanco text-2xl font-bold";
-  return (
-    <div className="flex items-center gap-4">
-      <button type="button" className={btn} onClick={onMenos} aria-label={`Menos ${etiqueta}`}>
-        −
-      </button>
-      <output className="min-w-16 text-center text-5xl font-extrabold" aria-live="polite">
-        {valor}
-      </output>
-      <button type="button" className={btn} onClick={onMas} aria-label={`Más ${etiqueta}`}>
-        +
-      </button>
-    </div>
-  );
-}
-
 function Diagnostico({ onSalir }: { onSalir: () => void }) {
   const [paso, setPaso] = useState(1);
   const [area, setArea] = useState<string | null>(null);
   const [herr, setHerr] = useState<string[]>([]);
-  const [personas, setPersonas] = useState(2);
-  const [horas, setHoras] = useState(2);
   const [problema, setProblema] = useState("");
 
-  const horasMes = personas * horas * diagnostico.diasHabiles;
   const resumen = [
     "Hola Moon Launch, hice el diagnóstico.",
     `Área: ${area ?? "sin elegir"}`,
     `Herramientas: ${herr.length ? herr.join(", ") : "ninguna"}`,
-    `Personas: ${personas}, ${horas} h al día cada una (${horasMes} h al mes)`,
     problema.trim() ? `Problema: ${problema.trim()}` : "",
     "Quiero agendar mi videollamada.",
   ]
@@ -57,18 +36,16 @@ function Diagnostico({ onSalir }: { onSalir: () => void }) {
     setPaso(1);
     setArea(null);
     setHerr([]);
-    setPersonas(2);
-    setHoras(2);
     setProblema("");
   }
 
-  if (paso === 6) {
+  if (paso === 4) {
     return (
       <div className="flex flex-col gap-3.5">
         <div className="rounded-[4px] bg-tinta p-4 text-blanco">
-          <div className="text-sm text-turquesa">Tu equipo dedica a {area ? area.toLowerCase() : "esa tarea"}</div>
-          <div className="mt-1.5 text-[46px] leading-none font-extrabold tracking-[-0.04em]">
-            {horasMes} h <span className="text-lg font-medium tracking-normal">al mes</span>
+          <div className="text-sm text-turquesa">Listo, ya tenemos tu caso.</div>
+          <div className="mt-1.5 text-[28px] leading-tight font-extrabold tracking-[-0.03em]">
+            Lo revisamos en 45 min, sin costo.
           </div>
         </div>
         <a href={linkWhatsApp(resumen)} target="_blank" rel="noopener noreferrer" className="btn bg-violeta text-blanco">
@@ -87,11 +64,11 @@ function Diagnostico({ onSalir }: { onSalir: () => void }) {
         className="borde h-2 overflow-hidden"
         role="progressbar"
         aria-valuemin={1}
-        aria-valuemax={5}
+        aria-valuemax={3}
         aria-valuenow={paso}
-        aria-label={`Pregunta ${paso} de 5`}
+        aria-label={`Pregunta ${paso} de 3`}
       >
-        <div className="h-full bg-violeta" style={{ width: `${paso * 20}%` }} />
+        <div className="h-full bg-violeta" style={{ width: `${(paso / 3) * 100}%` }} />
       </div>
 
       {paso === 1 && (
@@ -135,28 +112,6 @@ function Diagnostico({ onSalir }: { onSalir: () => void }) {
       )}
       {paso === 3 && (
         <>
-          <h3 className={h3}>¿Cuántas personas?</h3>
-          <Contador
-            valor={personas}
-            etiqueta="personas"
-            onMenos={() => setPersonas((v) => Math.max(1, v - 1))}
-            onMas={() => setPersonas((v) => Math.min(50, v + 1))}
-          />
-        </>
-      )}
-      {paso === 4 && (
-        <>
-          <h3 className={h3}>¿Horas al día, cada una?</h3>
-          <Contador
-            valor={horas}
-            etiqueta="horas"
-            onMenos={() => setHoras((v) => Math.max(1, v - 1))}
-            onMas={() => setHoras((v) => Math.min(10, v + 1))}
-          />
-        </>
-      )}
-      {paso === 5 && (
-        <>
           <h3 className={h3}>Tu problema, en una frase</h3>
           <label className="flex flex-col gap-1.5 text-sm font-semibold">
             Tu problema
@@ -180,7 +135,7 @@ function Diagnostico({ onSalir }: { onSalir: () => void }) {
           Atrás
         </button>
         <button type="button" onClick={() => setPaso(paso + 1)} className="btn flex-[2] bg-violeta text-blanco">
-          {paso === 5 ? "Ver resultado" : "Siguiente"}
+          {paso === 3 ? "Ver resultado" : "Siguiente"}
         </button>
       </div>
     </div>

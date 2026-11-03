@@ -59,6 +59,30 @@ export const diagnostico = {
   diasHabiles: 22,
 };
 
+/** Calculadora "¿Cuánto te cuesta el caos?" (aprobada 3 nov 2026). Sin IA: la cuenta sale de lo que elige el cliente. */
+export const calculadora = {
+  areas: ["Pedidos", "Inventario", "Cobranza", "Cotizaciones", "Atención"],
+  personas: { min: 1, max: 15, inicial: 3 },
+  horas: { min: 0.5, max: 8, paso: 0.5, inicial: 2 },
+  costo: { min: 50, max: 400, paso: 10, inicial: 100 },
+};
+
+/** Sección "Simplificamos": cada ícono abre su ventana. Las líneas con ">" son herramientas. */
+export const simplificamos = [
+  {
+    nombre: "Digitalizamos",
+    lineas: ["Del papel y el Excel", "a un sistema que todos ven.", "", "> Google Sheets", "> Odoo", "> App propia"],
+  },
+  {
+    nombre: "Automatizamos",
+    lineas: ["Lo que hoy alguien copia a mano,", "se hace solo.", "", "> n8n", "> Make", "> WhatsApp Business"],
+  },
+  {
+    nombre: "Analizamos",
+    lineas: ["Cuánto vendes, cuánto te cuesta", "y quién te debe.", "", "> Tableros", "> Reportes automáticos"],
+  },
+] as const;
+
 export const niveles = [
   { titulo: "Excel bien hecho", herr: "Google Sheets · Excel" },
   { titulo: "Herramientas listas", herr: "WhatsApp Business · Crisp · Odoo" },

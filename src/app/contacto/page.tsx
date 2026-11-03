@@ -31,7 +31,7 @@ export default function Contacto() {
             </span>
             <span>
               <strong className="block text-lg">Hacer mi diagnóstico</strong>
-              <span className="text-sm text-tinta/70">5 preguntas, 1 minuto.</span>
+              <span className="text-sm text-tinta/70">3 preguntas, 1 minuto.</span>
             </span>
           </Link>
           <a href={linkWhatsApp("Hola Moon Launch")} target="_blank" rel="noopener noreferrer" className={opcion}>

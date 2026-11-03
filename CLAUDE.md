@@ -36,15 +36,18 @@ Reglas:
 
 ## Estado
 
-Diseño aprobado por Diego (2 nov 2026): home + Servicios, Casos, Contacto, Blog y artículo, en el canvas
+Diseño aprobado por Diego (2 nov 2026; adiciones del home el 3 nov): home + Servicios, Casos, Contacto, Blog y artículo, en el canvas
 "moonlaunch.mx · mockups" de Claude Design (https://claude.ai/artifact/9Hcdqub1etvDJdcUukLcYU).
 
 Decisiones que no se reabren sin brief nuevo:
 - Titular "Automatiza. Ordena. Despega.". Nada de "con app o sin app" ni "semanas"; el plazo es "meses, no años".
-- Ventanas retro solo en el logo, en Moon OS (home) y en el formulario de Contacto. El resto, tarjetas simples.
+- Ventanas retro solo en el logo, en Moon OS (home), en el formulario de Contacto y en "Simplificamos" (home,
+  aprobado 3 nov 2026: ventanas de sistema operativo viejo). El resto, tarjetas simples.
 - Poco texto: frases de una línea; las dudas se contestan a la vista, sin acordeones.
-- Navbar en píldora flotante arriba (logo, Agendar y Menú). Todo lo que se pica usa `.nin` o `.btn`: sombra
+- Navbar flotante arriba, cuadrada con esquinas de 6 px (logo, Agendar y Menú). Todo lo que se pica usa `.nin` o `.btn`: sombra
   hacia abajo y se hunde al tocarlo, como botón de Nintendo. Las tarjetas que no se pican conservan la sombra diagonal.
+- Calculadora "¿Cuánto te cuesta el caos?" sin IA: botones, barras y perilla; la cuenta sale de lo que elige el
+  cliente (personas × horas × 22 días × pago por hora). El diagnóstico de Moon OS ya no repite esa cuenta.
 - Diagnóstico de 45 min sin costo. Apps en suscripción o compra, más soporte mensual. Sin cobro por usuario.
 - Pendiente de brief: cohetes en el logo, asistente con IA real, leads en Supabase, versión de escritorio.
 

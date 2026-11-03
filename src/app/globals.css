@@ -139,8 +139,86 @@ body {
 .vivo { animation: late 1.2s ease-in-out infinite; }
 .palomita { animation: aparece 0.35s ease-out both; }
 
+/* Barra de la calculadora: riel con relleno violeta y perilla turquesa que se hunde al arrastrarla */
+.barra {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 34px;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+.barra::-webkit-slider-runnable-track {
+  height: 14px;
+  border: 2px solid var(--color-tinta);
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--color-violeta) var(--p), var(--color-blanco) var(--p));
+}
+.barra::-moz-range-track {
+  height: 10px;
+  border: 2px solid var(--color-tinta);
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--color-violeta) var(--p), var(--color-blanco) var(--p));
+}
+.barra::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 32px;
+  height: 32px;
+  margin-top: -11px;
+  border: 2px solid var(--color-tinta);
+  border-radius: 6px;
+  background: var(--color-turquesa);
+  box-shadow: 0 4px 0 var(--color-tinta);
+}
+.barra::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-tinta);
+  border-radius: 6px;
+  background: var(--color-turquesa);
+  box-shadow: 0 4px 0 var(--color-tinta);
+}
+.barra:active::-webkit-slider-thumb {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--color-tinta);
+}
+.barra:focus-visible {
+  outline: none;
+}
+.barra:focus-visible::-webkit-slider-thumb {
+  outline: 3px solid var(--color-violeta);
+  outline-offset: 2px;
+}
+.barra:focus-visible::-moz-range-thumb {
+  outline: 3px solid var(--color-violeta);
+  outline-offset: 2px;
+}
+
+/* Perilla de horas: marcas alrededor */
+.perilla {
+  background: repeating-conic-gradient(from -135deg, var(--color-tinta) 0 1.5deg, transparent 1.5deg 27deg);
+  touch-action: none;
+}
+
+/* Ventana vieja de "Simplificamos" */
+.barra-titulo {
+  background: repeating-linear-gradient(var(--color-blanco) 0 2px, var(--color-tinta) 2px 3px);
+  touch-action: none;
+}
+@keyframes parpadea {
+  50% { opacity: 0; }
+}
+.cursor-terminal { animation: parpadea 1s steps(1) infinite; }
+@keyframes brota {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+.brota { animation: brota 0.18s ease-out; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .cursor-terminal, .brota { animation: none; }
   .nin, .btn { transition: none; }
   .pieza, .linea-viva { transition: none; }
   .vivo, .palomita { animation: none; }
