@@ -12,15 +12,12 @@
   font-display: swap;
 }
 
+/* Los 4 colores oficiales de Moon Launch. No agregar otros. */
 @theme {
-  --color-noche: #1f1346;
   --color-violeta: #683ee6;
-  --color-violeta-suave: #9173ed;
-  --color-lavanda: #f6f4fe;
   --color-tinta: #1d1e20;
+  --color-blanco: #ffffff;
   --color-turquesa: #48c9b0;
-  --color-naranja: #f87f23;
-  --color-linea: #e3defa;
 
   --font-marca: "Moonlightning", "Epilogue Variable", sans-serif;
   --font-sans: "Epilogue Variable", ui-sans-serif, system-ui, sans-serif;
@@ -32,73 +29,198 @@ html {
 }
 
 body {
-  background: var(--color-lavanda);
+  background: var(--color-blanco);
   color: var(--color-tinta);
   font-family: var(--font-sans);
-}
-
-.cifra {
-  font-variant-numeric: tabular-nums;
 }
 
 :focus-visible {
   outline: 3px solid var(--color-turquesa);
   outline-offset: 3px;
+}
+
+/* Piezas de la marca: borde grueso y sombra dura */
+@utility borde {
+  border: 2px solid var(--color-tinta);
+  border-radius: 4px;
+}
+@utility sombra {
+  box-shadow: 4px 4px 0 var(--color-tinta);
+}
+
+/* Botón tipo control de Nintendo: sombra hacia abajo; al picarlo se hunde completo.
+   Solo para cosas que se pican. Las tarjetas conservan la sombra diagonal (utility "sombra"). */
+.nin {
+  border: 2px solid var(--color-tinta);
+  box-shadow: 0 5px 0 var(--color-tinta);
+  transform: translateY(0);
+  transition:
+    transform 60ms ease-out,
+    box-shadow 60ms ease-out;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.nin:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 var(--color-tinta);
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-bottom: 5px;
+  padding: 0 18px;
+  border: 2px solid var(--color-tinta);
   border-radius: 6px;
+  box-shadow: 0 5px 0 var(--color-tinta);
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transform: translateY(0);
+  transition:
+    transform 60ms ease-out,
+    box-shadow 60ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 var(--color-tinta);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+.titulo-seccion {
+  margin: 0;
+  font-size: 32px;
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.035em;
 }
 
-/* Slider de marca: pista gruesa para el dedo, relleno turquesa */
-input[type="range"].rango {
+.punteado {
+  background-image: radial-gradient(rgb(29 30 32 / 0.1) 1.2px, transparent 1.3px);
+  background-size: 16px 16px;
+}
+.escritorio {
+  background-color: var(--color-violeta);
+  background-image: radial-gradient(rgb(255 255 255 / 0.22) 1.5px, transparent 1.6px);
+  background-size: 16px 16px;
+}
+
+/* Switch "Tu operación / Con Moon Launch" */
+.pieza {
+  transition:
+    transform 0.75s cubic-bezier(0.2, 0.9, 0.2, 1),
+    width 0.75s cubic-bezier(0.2, 0.9, 0.2, 1),
+    background-color 0.4s;
+}
+.linea-viva {
+  transition: opacity 0.5s ease 0.45s;
+}
+@keyframes viaja {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(340px); opacity: 0; }
+}
+@keyframes late {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@keyframes aparece {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+.pulso { animation: viaja 2.6s linear infinite; }
+.vivo { animation: late 1.2s ease-in-out infinite; }
+.palomita { animation: aparece 0.35s ease-out both; }
+
+/* Barra de la calculadora: riel con relleno violeta y perilla turquesa que se hunde al arrastrarla */
+.barra {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 44px;
+  height: 34px;
   background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
 }
-input[type="range"].rango::-webkit-slider-runnable-track {
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(
-    to right,
-    var(--color-turquesa) var(--p, 50%),
-    rgb(255 255 255 / 0.18) var(--p, 50%)
-  );
+.barra::-webkit-slider-runnable-track {
+  height: 14px;
+  border: 2px solid var(--color-tinta);
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--color-violeta) var(--p), var(--color-blanco) var(--p));
 }
-input[type="range"].rango::-moz-range-track {
-  height: 6px;
-  border-radius: 999px;
-  background: rgb(255 255 255 / 0.18);
+.barra::-moz-range-track {
+  height: 10px;
+  border: 2px solid var(--color-tinta);
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--color-violeta) var(--p), var(--color-blanco) var(--p));
 }
-input[type="range"].rango::-moz-range-progress {
-  height: 6px;
-  border-radius: 999px;
-  background: var(--color-turquesa);
-}
-input[type="range"].rango::-webkit-slider-thumb {
+.barra::-webkit-slider-thumb {
   -webkit-appearance: none;
+  width: 32px;
+  height: 32px;
+  margin-top: -11px;
+  border: 2px solid var(--color-tinta);
+  border-radius: 6px;
+  background: var(--color-turquesa);
+  box-shadow: 0 4px 0 var(--color-tinta);
+}
+.barra::-moz-range-thumb {
   width: 28px;
   height: 28px;
-  margin-top: -11px;
-  border-radius: 50%;
-  background: #fff;
-  border: 4px solid var(--color-turquesa);
+  border: 2px solid var(--color-tinta);
+  border-radius: 6px;
+  background: var(--color-turquesa);
+  box-shadow: 0 4px 0 var(--color-tinta);
 }
-input[type="range"].rango::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #fff;
-  border: 4px solid var(--color-turquesa);
+.barra:active::-webkit-slider-thumb {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--color-tinta);
+}
+.barra:focus-visible {
+  outline: none;
+}
+.barra:focus-visible::-webkit-slider-thumb {
+  outline: 3px solid var(--color-violeta);
+  outline-offset: 2px;
+}
+.barra:focus-visible::-moz-range-thumb {
+  outline: 3px solid var(--color-violeta);
+  outline-offset: 2px;
+}
+
+/* Perilla de horas: marcas alrededor */
+.perilla {
+  background: repeating-conic-gradient(from -135deg, var(--color-tinta) 0 1.5deg, transparent 1.5deg 27deg);
+  touch-action: none;
+}
+
+/* Ventana vieja de "Simplificamos" */
+.barra-titulo {
+  background: repeating-linear-gradient(var(--color-blanco) 0 2px, var(--color-tinta) 2px 3px);
+  touch-action: none;
+}
+@keyframes parpadea {
+  50% { opacity: 0; }
+}
+.cursor-terminal { animation: parpadea 1s steps(1) infinite; }
+@keyframes brota {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+.brota { animation: brota 0.18s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cursor-terminal, .brota { animation: none; }
+  .nin, .btn { transition: none; }
+  .pieza, .linea-viva { transition: none; }
+  .vivo, .palomita { animation: none; }
+  .pulso { display: none; }
 }
