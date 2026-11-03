@@ -49,7 +49,8 @@ Decisiones que no se reabren sin brief nuevo:
 - Calculadora "¿Cuánto te cuesta el caos?" sin IA: botones, barras y perilla; la cuenta sale de lo que elige el
   cliente (personas × horas × 22 días × pago por hora). El diagnóstico de Moon OS ya no repite esa cuenta.
 - Diagnóstico de 45 min sin costo. Apps en suscripción o compra, más soporte mensual. Sin cobro por usuario.
-- Pendiente de brief: cohetes en el logo, asistente con IA real, leads en Supabase, versión de escritorio.
+- Pendiente de brief: cohetes en el logo, asistente con IA real, leads en Supabase, versión de escritorio,
+  y en la calculadora poder elegir cuántos días al mes (hoy fijo en 22) para no asumir que el caos dura todo el mes.
 
 ## Marca
 
