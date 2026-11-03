@@ -1,0 +1,16 @@
+# Moon Launch
+
+> Agencia mexicana que automatiza la operación de pymes: distribuidoras, fábricas, comercializadoras y servicios técnicos. Del pedido al cobro, sin que nada se pierda.
+
+- Diagnóstico sin costo: videollamada de 45 minutos; el cliente sale con su operación desglosada por etapas, áreas y proyectos.
+- Servicios: Excel y Google Sheets que trabajan solos; herramientas listas (WhatsApp Business, Crisp, Odoo); automatizaciones (n8n, Make); apps a la medida en suscripción o compra.
+- Precio fijo por etapa, sin cobro por usuario. Trabajo 100% remoto con negocios de todo México.
+- Fundador: Diego Garza. Contacto: contacto@moonlaunch.mx, +52 55 6876 1133.
+
+## Páginas
+
+- [Servicios](https://www.moonlaunch.mx/servicios)
+- [Casos](https://www.moonlaunch.mx/casos)
+- [Contacto](https://www.moonlaunch.mx/contacto)
+- [Blog](https://www.moonlaunch.mx/blog)
+- [¿Odoo o app propia?](https://www.moonlaunch.mx/blog/odoo-o-app-propia)

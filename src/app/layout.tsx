@@ -1,34 +1,52 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/epilogue";
 import "./globals.css";
+import { contacto } from "@/lib/site";
+
+const descripcion =
+  "Automatizamos la operación de distribuidoras, fábricas, comercializadoras y servicios técnicos en México: del pedido al cobro, sin que nada se pierda.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.moonlaunch.mx"),
-  title: "Moon Launch · Tecnología simple para pymes",
-  description:
-    "Digitalizamos, automatizamos y analizamos la operación de pymes y emprendedores en México. Calcula en un minuto cuánto te cuesta el caos operativo.",
-  keywords: ["transformación digital", "automatización de procesos", "apps a la medida", "Odoo", "pymes México"],
+  title: { default: "Moon Launch · Automatiza. Ordena. Despega.", template: "%s · Moon Launch" },
+  description: descripcion,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "es_MX",
     siteName: "Moon Launch",
-    title: "¿Cuánto te cuesta el caos operativo?",
-    description: "Calcula en un minuto cuánto pierde tu negocio cada mes y cómo recuperarlo.",
+    title: "Moon Launch · Automatiza. Ordena. Despega.",
+    description: descripcion,
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1f1346",
+  themeColor: "#683ee6",
   width: "device-width",
   initialScale: 1,
+};
+
+const organizacion = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Moon Launch",
+  url: "https://www.moonlaunch.mx",
+  description: descripcion,
+  email: contacto.email,
+  telephone: `+${contacto.whatsapp}`,
+  areaServed: "MX",
+  address: { "@type": "PostalAddress", streetAddress: "Anáhuac 6, Roma Sur", addressLocality: "Ciudad de México", addressCountry: "MX" },
+  founder: { "@type": "Person", name: "Diego Garza" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es-MX" className="antialiased">
-      <body className="min-h-dvh">{children}</body>
+      <body className="min-h-dvh">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizacion) }} />
+        {children}
+      </body>
     </html>
   );
 }

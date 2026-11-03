@@ -7,7 +7,7 @@ Todo el texto del sitio va en español de México.
 
 ## Stack
 
-- Next.js 16 (App Router, Cache Components) + TypeScript + Tailwind v4 + Motion
+- Next.js 16 (App Router, Cache Components) + TypeScript + Tailwind v4 (animaciones en CSS)
 - Hosting: **Cloudflare Workers** con `@opennextjs/cloudflare`. No es Vercel: nada de APIs exclusivas de Vercel
   (`@vercel/*`, Edge Config, `export const runtime = "edge"`).
 - El Worker debe pesar menos de 3 MiB comprimido (plan gratis). Hoy pesa ~1.1 MiB. Revisa con
@@ -36,9 +36,15 @@ Reglas:
 
 ## Estado
 
-El home actual (diagnóstico, secciones y logo con cohetes) es un **borrador** previo al proceso: no está
-aprobado. El rediseño arranca en el paso 1. Lo único decidido: logo dirección B (`moonlaunch.exe`) con algo
-interactivo de cohetes, y la referencia visual de charm.sh.
+Diseño aprobado por Diego (2 nov 2026): home + Servicios, Casos, Contacto, Blog y artículo, en el canvas
+"moonlaunch.mx · mockups" de Claude Design (https://claude.ai/artifact/9Hcdqub1etvDJdcUukLcYU).
+
+Decisiones que no se reabren sin brief nuevo:
+- Titular "Automatiza. Ordena. Despega.". Nada de "con app o sin app" ni "semanas"; el plazo es "meses, no años".
+- Ventanas retro solo en el logo, en Moon OS (home) y en el formulario de Contacto. El resto, tarjetas simples.
+- Poco texto: frases de una línea; las dudas se contestan a la vista, sin acordeones.
+- Diagnóstico de 45 min sin costo. Apps en suscripción o compra, más soporte mensual. Sin cobro por usuario.
+- Pendiente de brief: cohetes en el logo, asistente con IA real, leads en Supabase, versión de escritorio.
 
 ## Marca
 
@@ -46,12 +52,12 @@ interactivo de cohetes, y la referencia visual de charm.sh.
   Tokens en `src/app/globals.css` (`@theme`).
 - Tipografía de marca: Moonlightning (`font-marca`, archivos en `public/fonts/`). Solo para el logo y momentos
   puntuales; el resto en Epilogue (`font-sans`).
-- Logo: ventana retro `moonlaunch.exe` (`src/components/LogoExe.tsx`). La interacción con cohetes está pendiente de mockup.
+- Logo: ventana retro `moonlaunch.exe` (`src/components/Logo.tsx`). La interacción con cohetes está pendiente de mockup.
 - Dirección visual: retro tech simple, más cerca de charm.sh que de un sitio saturado. Mobile first:
   la mayoría del tráfico es de celular.
 - Siempre respetar `prefers-reduced-motion`, foco visible y contraste accesible.
 
 ## Contenido
 
-- Todo el texto editable vive en `src/lib/site.ts` (contacto, problemas del diagnóstico, servicios, pasos).
+- Todo el texto editable vive en `src/lib/site.ts`. Lo que va entre corchetes `[así]` está pendiente de Diego.
 - Nunca mostrar datos reales de clientes (nombres, precios, costos) sin permiso explícito de Diego.
