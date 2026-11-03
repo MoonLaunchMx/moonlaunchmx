@@ -6,8 +6,8 @@ Sitio de Moon Launch. Reemplaza el sitio de Hostinger Website Builder.
 
 - **Next.js 16** (App Router, Cache Components) + **TypeScript**
 - **Tailwind CSS v4**: tokens de marca en `src/app/globals.css` (`@theme`)
-- **Epilogue** (variable, servida localmente con `@fontsource`)
-- Deploy en **Cloudflare Workers** con `@opennextjs/cloudflare` (Workers Builds: push a `main` = producción, ramas = preview)
+- **Epilogue** (variable, servida localmente con `@fontsource`) y **Moonlightning** para el logo
+- Deploy en **Vercel**: cada PR genera un preview y el merge a `main` va a producción
 
 ## Dónde se edita qué
 
@@ -23,9 +23,8 @@ Sitio de Moon Launch. Reemplaza el sitio de Hostinger Website Builder.
 
 ```bash
 npm install
-npm run dev       # desarrollo
-npm run preview   # probar en el runtime de Workers
-npm run deploy    # desplegar a mano (normalmente lo hace Workers Builds)
+npm run dev                  # desarrollo
+npm run build && npm start   # probar el build de producción
 ```
 
 ## Siguiente
@@ -33,4 +32,4 @@ npm run deploy    # desplegar a mano (normalmente lo hace Workers Builds)
 - [ ] Guardar cada diagnóstico como lead (Supabase) y avisar por correo (Resend)
 - [ ] Asistente que responde dudas con la info de Moon Launch (AI SDK + Claude)
 - [ ] Analytics (GA4 `G-Y18PD7J4E8` / GTM `GTM-TCZRC2ZG` del sitio anterior)
-- [ ] Conectar el repo en Workers Builds y apuntar moonlaunch.mx al Worker
+- [ ] Apuntar moonlaunch.mx a Vercel (cuidando los registros MX del correo)

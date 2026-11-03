@@ -14,6 +14,6 @@
 ## Checklist
 
 - [ ] Construí solo lo que está en el mockup aprobado
-- [ ] `npm run lint`, `npx tsc --noEmit` y `npx opennextjs-cloudflare build` pasan
-- [ ] Preview de Cloudflare revisado en celular por Diego
+- [ ] `npm run lint`, `npx tsc --noEmit` y `npm run build` pasan
+- [ ] Preview de Vercel revisado en celular por Diego
 - [ ] Diego aprobó el preview

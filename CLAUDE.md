@@ -8,10 +8,10 @@ Todo el texto del sitio va en español de México.
 ## Stack
 
 - Next.js 16 (App Router, Cache Components) + TypeScript + Tailwind v4 (animaciones en CSS)
-- Hosting: **Cloudflare Workers** con `@opennextjs/cloudflare`. No es Vercel: nada de APIs exclusivas de Vercel
-  (`@vercel/*`, Edge Config, `export const runtime = "edge"`).
-- El Worker debe pesar menos de 3 MiB comprimido (plan gratis). Hoy pesa ~1.1 MiB. Revisa con
-  `npx wrangler deploy --dry-run --outdir /tmp/cf-dry` si agregas dependencias pesadas.
+- Hosting: **Vercel**, en el equipo Pro de Diego (junto a Anfiora y Cuantix). Decidido el 2 nov 2026; antes se
+  probó Cloudflare Workers y se descartó porque Diego ya paga Vercel Pro.
+- Vercel cobra por uso dentro del mismo equipo: mantén el sitio casi todo estático. Antes de agregar funciones
+  pesadas, optimización de imágenes o IA, avísale a Diego por el costo.
 
 ## Proceso de cambios (aprobado por Diego, 25 oct 2026)
 
@@ -23,8 +23,8 @@ Diego aprueba dos veces: el diseño y el preview. Nada visual se construye sin m
 3. **Aprobación del diseño.** Solo cuenta un "aprobado" explícito de Diego. Con eso se congela el alcance;
    lo que salga después es otro brief.
 4. **Rama + PR.** Construye exactamente lo aprobado. El PR lleva el link del mockup (usa la plantilla).
-   Antes de cada commit: `npm run lint`, `npx tsc --noEmit` y `npx opennextjs-cloudflare build`.
-5. **Preview.** Workers Builds publica una URL por rama. Diego la revisa en su celular contra el mockup.
+   Antes de cada commit: `npm run lint`, `npx tsc --noEmit` y `npm run build`.
+5. **Preview.** Vercel publica una URL de preview por cada PR. Diego la revisa en su celular contra el mockup.
 6. **Aprobación del preview** y merge a `main` = producción. Después, revisa producción.
 
 **Carril rápido:** textos, typos y datos de contacto se saltan los pasos 2 y 3, pero sí van con rama, PR y preview.
@@ -32,7 +32,7 @@ Diego aprueba dos veces: el diseño y el preview. Nada visual se construye sin m
 Reglas:
 - Nunca hagas push directo a `main` ni merge sin que Diego lo pida.
 - Si algo no estaba en el mockup aprobado, no lo agregues "de paso": propónlo como brief nuevo.
-- `npm run dev` para desarrollo; `npm run preview` para probar en el runtime real de Workers.
+- `npm run dev` para desarrollo; `npm run build && npm start` para probar el build de producción.
 
 ## Estado
 
