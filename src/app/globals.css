@@ -48,24 +48,49 @@ body {
   box-shadow: 4px 4px 0 var(--color-tinta);
 }
 
+/* Botón tipo control de Nintendo: sombra hacia abajo; al picarlo se hunde completo.
+   Solo para cosas que se pican. Las tarjetas conservan la sombra diagonal (utility "sombra"). */
+.nin {
+  border: 2px solid var(--color-tinta);
+  box-shadow: 0 5px 0 var(--color-tinta);
+  transform: translateY(0);
+  transition:
+    transform 60ms ease-out,
+    box-shadow 60ms ease-out;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.nin:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 var(--color-tinta);
+}
+
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
+  margin-bottom: 5px;
   padding: 0 18px;
   border: 2px solid var(--color-tinta);
-  border-radius: 4px;
-  box-shadow: 4px 4px 0 var(--color-tinta);
+  border-radius: 6px;
+  box-shadow: 0 5px 0 var(--color-tinta);
   font-weight: 700;
   font-size: 16px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  transform: translateY(0);
+  transition:
+    transform 60ms ease-out,
+    box-shadow 60ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--color-tinta);
+  transform: translateY(5px);
+  box-shadow: 0 0 0 var(--color-tinta);
 }
 
 .titulo-seccion {
@@ -116,6 +141,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .nin, .btn { transition: none; }
   .pieza, .linea-viva { transition: none; }
   .vivo, .palomita { animation: none; }
   .pulso { display: none; }

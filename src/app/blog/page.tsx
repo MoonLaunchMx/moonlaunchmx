@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 const tarjeta = "borde sombra flex flex-col gap-2 bg-blanco px-3.5 py-4 text-tinta no-underline";
+const tarjetaLink = "nin flex flex-col gap-2 rounded-[6px] bg-blanco px-3.5 py-4 text-tinta no-underline";
 
 export default function Blog() {
   return (
@@ -24,7 +25,7 @@ export default function Blog() {
         <section className="mx-auto flex max-w-2xl flex-col gap-3.5 px-4 pb-12">
           {posts.map((p) =>
             p.slug ? (
-              <Link key={p.titulo} href={`/blog/${p.slug}`} className={tarjeta}>
+              <Link key={p.titulo} href={`/blog/${p.slug}`} className={tarjetaLink}>
                 <strong className="text-xl leading-tight">{p.titulo}</strong>
                 <span className="text-[13px] text-tinta/70">{p.minutos} min</span>
               </Link>

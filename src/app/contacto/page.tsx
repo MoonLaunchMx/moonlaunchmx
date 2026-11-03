@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contacto" },
 };
 
-const opcion = "borde sombra flex items-center gap-3.5 bg-blanco p-3.5 text-tinta no-underline";
+const opcion = "nin flex items-center gap-3.5 rounded-[6px] bg-blanco p-3.5 text-tinta no-underline";
 const ico = "borde grid size-12 shrink-0 place-items-center";
 
 export default function Contacto() {

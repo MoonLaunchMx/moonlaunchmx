@@ -43,6 +43,8 @@ Decisiones que no se reabren sin brief nuevo:
 - Titular "Automatiza. Ordena. Despega.". Nada de "con app o sin app" ni "semanas"; el plazo es "meses, no años".
 - Ventanas retro solo en el logo, en Moon OS (home) y en el formulario de Contacto. El resto, tarjetas simples.
 - Poco texto: frases de una línea; las dudas se contestan a la vista, sin acordeones.
+- Navbar en píldora flotante arriba (logo, Agendar y Menú). Todo lo que se pica usa `.nin` o `.btn`: sombra
+  hacia abajo y se hunde al tocarlo, como botón de Nintendo. Las tarjetas que no se pican conservan la sombra diagonal.
 - Diagnóstico de 45 min sin costo. Apps en suscripción o compra, más soporte mensual. Sin cobro por usuario.
 - Pendiente de brief: cohetes en el logo, asistente con IA real, leads en Supabase, versión de escritorio.
 
@@ -50,7 +52,8 @@ Decisiones que no se reabren sin brief nuevo:
 
 - Colores oficiales: violeta `#683EE6`, tinta `#1D1E20`, blanco `#FFFFFF`, turquesa `#48C9B0`.
   Tokens en `src/app/globals.css` (`@theme`).
-- Tipografía de marca: Moonlightning (`font-marca`, archivos en `public/fonts/`). Solo para el logo y momentos
+- Tipografía de marca: Moonlightning (`font-marca`, archivos en `public/fonts/`). **Sin licencia comercial**: Diego
+  decidió usarla por ahora y cambiarla después. No la presentes como resuelta. Solo para el logo y momentos
   puntuales; el resto en Epilogue (`font-sans`).
 - Logo: ventana retro `moonlaunch.exe` (`src/components/Logo.tsx`). La interacción con cohetes está pendiente de mockup.
 - Dirección visual: retro tech simple, más cerca de charm.sh que de un sitio saturado. Mobile first:

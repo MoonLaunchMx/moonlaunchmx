@@ -13,11 +13,11 @@ const apps: { id: App; label: string; titulo: string; icono: string; turquesa?: 
   { id: "casos", label: "casos", titulo: "casos", icono: iconos.archivo },
 ];
 
-const chip = "inline-flex min-h-11 items-center rounded-full border-2 border-tinta px-3.5 text-[15px] font-semibold";
+const chip = "nin mb-[5px] inline-flex min-h-11 items-center rounded-full px-3.5 text-[15px] font-semibold";
 const h3 = "m-0 text-[22px] leading-[1.1] font-extrabold";
 
 function Contador({ valor, onMenos, onMas, etiqueta }: { valor: number; onMenos: () => void; onMas: () => void; etiqueta: string }) {
-  const btn = "borde grid size-12 place-items-center bg-blanco text-2xl font-bold";
+  const btn = "nin mb-[5px] grid size-12 place-items-center rounded-[6px] bg-blanco text-2xl font-bold";
   return (
     <div className="flex items-center gap-4">
       <button type="button" className={btn} onClick={onMenos} aria-label={`Menos ${etiqueta}`}>
@@ -201,7 +201,7 @@ function Pregunta() {
             key={q}
             type="button"
             onClick={() => enviar(q)}
-            className="inline-flex min-h-11 items-center rounded-full border-[1.5px] border-tinta bg-blanco px-3 text-sm font-semibold"
+            className="nin mb-[5px] inline-flex min-h-11 items-center rounded-full bg-blanco px-3 text-sm font-semibold"
           >
             {q}
           </button>
@@ -224,7 +224,7 @@ function Pregunta() {
           placeholder="Escribe tu pregunta…"
           className="min-w-0 flex-1 border-0 py-2.5 text-base outline-none"
         />
-        <button type="submit" aria-label="Enviar pregunta" className="grid size-10 place-items-center rounded-[4px] bg-violeta">
+        <button type="submit" aria-label="Enviar pregunta" className="grid size-10 place-items-center rounded-[4px] bg-violeta active:bg-tinta">
           <Icono d={iconos.enviar} size={18} color="#ffffff" grosor={2.5} />
         </button>
       </form>
@@ -250,10 +250,10 @@ export default function MoonOS() {
             key={a.id}
             type="button"
             onClick={() => setAbierta(a.id)}
-            className="group flex flex-col items-center gap-1.5 text-[13px] font-semibold text-blanco"
+            className="flex flex-col items-center gap-1.5 text-[13px] font-semibold text-blanco"
           >
             <span
-              className={`borde sombra grid size-[68px] place-items-center group-active:translate-x-0.5 group-active:translate-y-0.5 group-active:shadow-[2px_2px_0_var(--color-tinta)] ${
+              className={`nin grid size-[68px] place-items-center rounded-[6px] ${
                 a.turquesa ? "bg-turquesa" : "bg-blanco"
               }`}
             >
@@ -276,7 +276,7 @@ export default function MoonOS() {
               type="button"
               onClick={() => setAbierta(null)}
               aria-label="Cerrar"
-              className="borde grid size-10 place-items-center bg-blanco"
+              className="nin mb-[5px] grid size-9 place-items-center rounded-[6px] bg-blanco"
             >
               <Icono d="M6 6l12 12M18 6L6 18" size={16} color="#1d1e20" grosor={3} />
             </button>

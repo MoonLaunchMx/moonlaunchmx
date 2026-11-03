@@ -4,7 +4,7 @@ import { useState } from "react";
 import Icono from "@/components/Icono";
 import { piezas } from "@/lib/site";
 
-const segmento = "min-h-[52px] text-[15px] font-bold";
+const segmento = "min-h-[52px] text-[15px] font-bold transition-transform duration-75 active:translate-y-[3px]";
 
 export default function OperacionSwitch() {
   const [conectado, setConectado] = useState(false);

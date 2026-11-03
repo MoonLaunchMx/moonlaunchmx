@@ -2,38 +2,55 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "@/components/Logo";
 import { menu, waAgendar } from "@/lib/site";
 
+const pildoraBtn = "nin flex min-h-10 items-center rounded-full px-3.5 text-sm font-extrabold";
+
+/** Navbar en píldora flotante arriba (aprobado 2 nov 2026). */
 export default function Header({ volverA }: { volverA?: { href: string; label: string } }) {
   const [abierto, setAbierto] = useState(false);
   const ruta = usePathname();
 
+  // iOS solo aplica :active (el "piquete" de los botones) si hay un listener táctil.
+  useEffect(() => {
+    const nada = () => {};
+    document.addEventListener("touchstart", nada, { passive: true });
+    return () => document.removeEventListener("touchstart", nada);
+  }, []);
+
   return (
-    <header className="relative mx-auto flex max-w-2xl items-center justify-between px-4 py-3.5">
-      <Logo />
-      {volverA ? (
-        <Link href={volverA.href} className="py-3 text-[15px] font-bold text-violeta">
-          ← {volverA.label}
-        </Link>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setAbierto((v) => !v)}
-          aria-expanded={abierto}
-          aria-controls="menu-principal"
-          className="borde min-h-11 bg-blanco px-3.5 text-[15px] font-bold"
-        >
-          {abierto ? "Cerrar" : "Menú"}
-        </button>
-      )}
+    <header className="sticky top-2.5 z-30 mx-auto mt-2.5 max-w-2xl px-2.5">
+      <div className="flex items-center justify-between gap-2 rounded-full border-2 border-tinta bg-blanco py-1.5 pr-1.5 pl-2.5 shadow-[0_4px_0_var(--color-tinta)]">
+        <Logo />
+        <div className="flex items-center gap-1.5 pb-[5px]">
+          <a href={waAgendar} target="_blank" rel="noopener noreferrer" className={`${pildoraBtn} bg-violeta text-blanco`}>
+            Agendar
+          </a>
+          {volverA ? (
+            <Link href={volverA.href} className={`${pildoraBtn} bg-blanco text-tinta`}>
+              ← {volverA.label}
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setAbierto((v) => !v)}
+              aria-expanded={abierto}
+              aria-controls="menu-principal"
+              className={`${pildoraBtn} bg-blanco text-tinta`}
+            >
+              {abierto ? "Cerrar" : "Menú"}
+            </button>
+          )}
+        </div>
+      </div>
 
       {abierto && (
         <nav
           id="menu-principal"
           aria-label="Menú principal"
-          className="borde sombra absolute top-[76px] right-4 left-3 z-20 overflow-hidden bg-blanco"
+          className="borde sombra absolute top-[calc(100%+10px)] right-2.5 left-2.5 overflow-hidden bg-blanco"
         >
           {menu.map((m) => (
             <Link
