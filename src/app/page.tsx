@@ -12,25 +12,28 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <section className={`${contenedor} flex flex-col gap-[22px] pt-7 pb-10`}>
-          <h1 className="m-0 text-[52px] leading-[0.9] font-extrabold tracking-[-0.045em]">
-            Automatiza.
-            <br />
-            Ordena.
-            <br />
-            <span className="text-violeta">Despega.</span>
-          </h1>
-          <p className="m-0 text-xl leading-tight font-semibold">
-            Tu equipo trabaja más rápido, vende más y deja de apagar fuegos.
-          </p>
-          <a href="#os" className="btn bg-violeta text-blanco">
-            Agendar videollamada sin costo
-          </a>
-        </section>
+        {/* Celular: hero y Simplificamos uno debajo del otro. Escritorio: lado a lado. */}
+        <div className="mx-auto max-w-2xl lg:grid lg:max-w-6xl lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-12 lg:px-6 lg:pt-14 lg:pb-20">
+          <section className="flex flex-col gap-[22px] px-4 pt-7 pb-10 lg:gap-7 lg:p-0">
+            <h1 className="m-0 text-[52px] leading-[0.9] font-extrabold tracking-[-0.045em] lg:text-[84px] xl:text-[96px]">
+              Automatiza.
+              <br />
+              Ordena.
+              <br />
+              <span className="text-violeta">Despega.</span>
+            </h1>
+            <p className="m-0 text-xl leading-tight font-semibold lg:max-w-[26ch] lg:text-2xl">
+              Tu equipo trabaja más rápido, vende más y deja de apagar fuegos.
+            </p>
+            <a href="#os" className="btn bg-violeta text-blanco lg:self-start lg:px-7">
+              Agendar videollamada sin costo
+            </a>
+          </section>
 
-        <section className={`${contenedor} pb-10`} aria-labelledby="simplificamos">
-          <Simplificamos />
-        </section>
+          <section className="px-4 pb-10 lg:p-0" aria-labelledby="simplificamos">
+            <Simplificamos />
+          </section>
+        </div>
 
         <section className={`${contenedor} flex flex-col gap-[18px] pb-10`} aria-labelledby="te-suena">
           <h2 id="te-suena" className="titulo-seccion">
