@@ -15,19 +15,26 @@ function reducirMovimiento() {
 }
 
 function IconoApp({ nombre }: { nombre: Item["nombre"] }) {
+  // Digitalizamos: pantalla con código.
   if (nombre === "Digitalizamos")
     return (
       <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden>
-        <rect x="6" y="5" width="22" height="26" rx="2" fill="#fff" stroke="#1d1e20" strokeWidth="2.5" />
-        <path d="M11 13h12M11 18h12M11 23h7" stroke="#683ee6" strokeWidth="2.5" strokeLinecap="round" />
+        <rect x="3.5" y="5.5" width="29" height="20" rx="2" fill="#fff" stroke="#1d1e20" strokeWidth="2.5" />
+        <path d="M13 11.5l-4 4 4 4M23 11.5l4 4-4 4" fill="none" stroke="#683ee6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M19.5 10.5l-3 10" stroke="#48c9b0" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M18 25.5v5M12 31h12" stroke="#1d1e20" strokeWidth="2.5" strokeLinecap="round" />
       </svg>
     );
+  // Automatizamos: robot.
   if (nombre === "Automatizamos")
     return (
       <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden>
-        <circle cx="17" cy="18" r="9" fill="#48c9b0" stroke="#1d1e20" strokeWidth="2.5" />
-        <path d="M17 4v5M17 27v5M3 18h5M26 18h5" stroke="#1d1e20" strokeWidth="2.5" strokeLinecap="round" />
-        <circle cx="17" cy="18" r="3" fill="#fff" stroke="#1d1e20" strokeWidth="2" />
+        <path d="M18 11V6.5" stroke="#1d1e20" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="18" cy="5" r="2.5" fill="#683ee6" stroke="#1d1e20" strokeWidth="2" />
+        <rect x="7" y="11" width="22" height="18" rx="3" fill="#48c9b0" stroke="#1d1e20" strokeWidth="2.5" />
+        <circle cx="13.5" cy="18.5" r="2.5" fill="#fff" stroke="#1d1e20" strokeWidth="2" />
+        <circle cx="22.5" cy="18.5" r="2.5" fill="#fff" stroke="#1d1e20" strokeWidth="2" />
+        <path d="M14 24.5h8M4 17v6M32 17v6" stroke="#1d1e20" strokeWidth="2.5" strokeLinecap="round" />
       </svg>
     );
   return (
