@@ -70,7 +70,7 @@ export const calculadora = {
 /** Hero (aprobado 13 nov 2026). */
 export const hero = {
   titular: ["Ordena.", "Automatiza.", "Despega."],
-  subtitulo: "No necesitas saber de tecnología. Nosotros la simplificamos y la ponemos a trabajar en tu negocio.",
+  subtitulo: "Simplificamos la tecnología para pymes y emprendedores.",
 };
 
 /**

@@ -32,7 +32,7 @@ type Disposicion = {
   barraY: number;
   columnas: Record<string, number>;
   carpetaY: number;
-  gente: { y: number; dy: number; w: number; letra: number };
+  gente: { y: number; dy: number; w: number; letra: number; compacta: boolean };
   lema: XY & { w: number; letra: number };
   app: XY & { w: number; lateral: boolean };
   alerta: XY & { w: number };
@@ -55,7 +55,7 @@ const ESCRITORIO: Disposicion = {
   barraY: 120,
   columnas: Object.fromEntries(escritorio.carpetas.map((c) => [c.id, c.arbol.x])),
   carpetaY: 154,
-  gente: { y: 292, dy: 50, w: 142, letra: 14 },
+  gente: { y: 292, dy: 50, w: 142, letra: 14, compacta: false },
   lema: { x: 750, y: 420, w: 622, letra: 17 },
   app: { x: 760, y: 30, w: 600, lateral: true },
   alerta: { x: 820, y: 200, w: 400 },
@@ -90,7 +90,7 @@ const CELULAR: Disposicion = {
   barraY: 78,
   columnas: { ventas: 7, compras: 104, inventario: 202, cobranza: 299 },
   carpetaY: 98,
-  gente: { y: 188, dy: 40, w: 92, letra: 11 },
+  gente: { y: 188, dy: 40, w: 94, letra: 9.5, compacta: true },
   lema: { x: 12, y: 284, w: 366, letra: 13 },
   app: { x: 12, y: 0, w: 366, lateral: false },
   alerta: { x: 20, y: 90, w: 350 },
@@ -420,8 +420,8 @@ export default function Escritorio({ modo }: { modo: Modo }) {
                     top: uy(d.gente.y + j * d.gente.dy),
                     width: u(d.gente.w),
                     minHeight: u(d.gente.letra * 2.7),
-                    gap: u(d.gente.letra / 2),
-                    padding: `${u(d.gente.letra / 2.5)} ${u(d.gente.letra / 1.6)}`,
+                    gap: u(d.gente.compacta ? 3 : d.gente.letra / 2),
+                    padding: d.gente.compacta ? `${u(4)} ${u(4)}` : `${u(d.gente.letra / 2.5)} ${u(d.gente.letra / 1.6)}`,
                     fontSize: u(d.gente.letra),
                     animationDelay: `${0.85 + i * 0.1 + j * 0.12}s`,
                   }}
