@@ -28,7 +28,7 @@ export default function Home() {
         {/* Celular: el mismo hero, del alto de la pantalla (debajo de la navbar flotante). */}
         <section
           aria-label="Ordena. Automatiza. Despega."
-          className="escritorio-claro relative isolate -mt-[74px] h-svh min-h-[640px] pt-[86px] pb-3 lg:hidden"
+          className="escritorio-claro relative isolate -mt-[74px] h-svh pt-[86px] pb-[max(10px,env(safe-area-inset-bottom))] lg:hidden"
         >
           <div className="mx-auto h-full max-w-2xl">
             <Escritorio modo="celular" />

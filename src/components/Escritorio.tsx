@@ -164,6 +164,9 @@ export default function Escritorio({ modo }: { modo: Modo }) {
   // En celular lo vertical se mide con --v (alto del escenario); en escritorio todo con --u.
   const uy = (n: number) => (cel ? `calc(var(--v) * ${n})` : u(n));
   const suma = (yv: number, yu: number) => (cel ? `calc(var(--v) * ${yv} + var(--u) * ${yu})` : u(yv + yu));
+  // En celular lo horizontal se mide con --x (ancho del escenario); los tamaños con --u, que se encoge si el teléfono es bajito.
+  const ux = (n: number) => (cel ? `calc(var(--x) * ${n})` : u(n));
+  const centrado = (cx: number, w: number) => (cel ? `calc(var(--x) * ${cx} - var(--u) * ${w / 2})` : u(cx - w / 2));
 
   const escenario = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
@@ -300,7 +303,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
   };
 
   const titular = (
-    <h1 className={`m-0 font-extrabold tracking-[-0.045em] ${cel ? "text-[clamp(40px,12vw,52px)] leading-[0.9]" : ""}`} style={cel ? undefined : { fontSize: u(104), lineHeight: 0.92 }}>
+    <h1 className={`m-0 font-extrabold tracking-[-0.045em] ${cel ? "text-[min(12vw,6.2svh,52px)] leading-[0.9]" : ""}`} style={cel ? undefined : { fontSize: u(104), lineHeight: 0.92 }}>
       {hero.titular.map((t, i) => (
         <span key={t}>
           <span className={palabra(i + 1)}>{t}</span>
@@ -329,7 +332,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
         <section
           aria-label="Tu negocio"
           className="abre absolute z-30 rounded-[4px] border-2 border-tinta bg-blanco shadow-[4px_4px_0_var(--color-tinta)]"
-          style={{ left: u(d.raiz.x), top: uy(d.raiz.y), width: u(d.raiz.w) }}
+          style={{ left: centrado(d.raiz.x + d.raiz.w / 2, d.raiz.w), top: uy(d.raiz.y), width: u(d.raiz.w) }}
         >
           <div
             className="flex items-center justify-center border-b-2 border-tinta bg-violeta font-marca text-blanco italic"
@@ -347,29 +350,29 @@ export default function Escritorio({ modo }: { modo: Modo }) {
           <div aria-hidden>
             <div
               className="linea-y absolute bg-tinta"
-              style={{ left: u(d.raiz.x + d.raiz.w / 2 - 1), top: suma(d.raiz.y, d.raiz.alto), width: u(3), height: `calc(${uy(d.barraY)} - ${suma(d.raiz.y, d.raiz.alto)})` }}
+              style={{ left: ux(d.raiz.x + d.raiz.w / 2 - 1), top: suma(d.raiz.y, d.raiz.alto), width: u(3), height: `calc(${uy(d.barraY)} - ${suma(d.raiz.y, d.raiz.alto)})` }}
             />
             <div
               className="linea-x absolute bg-tinta"
-              style={{ left: u(centro(primero) - 1), top: uy(d.barraY), width: u(centro(ultimo) - centro(primero) + 3), height: u(3), animationDelay: ".15s" }}
+              style={{ left: ux(centro(primero) - 1), top: uy(d.barraY), width: ux(centro(ultimo) - centro(primero) + 3), height: u(3), animationDelay: ".15s" }}
             />
             <i
               className="punto-baja absolute box-border rounded-full border-2 border-tinta bg-turquesa"
-              style={{ left: u(d.raiz.x + d.raiz.w / 2 - 6), top: suma(d.raiz.y, d.raiz.alto + 2), width: u(13), height: u(13) }}
+              style={{ left: ux(d.raiz.x + d.raiz.w / 2 - 6), top: suma(d.raiz.y, d.raiz.alto + 2), width: u(13), height: u(13) }}
             />
             {escritorio.carpetas.map((c, i) => (
               <span key={c.id}>
                 <div
                   className="linea-y absolute bg-tinta"
-                  style={{ left: u(centro(c.id) - 1), top: uy(d.barraY), width: u(3), height: uy(d.carpetaY - d.barraY), animationDelay: ".3s" }}
+                  style={{ left: ux(centro(c.id) - 1), top: uy(d.barraY), width: u(3), height: uy(d.carpetaY - d.barraY), animationDelay: ".3s" }}
                 />
                 <div
                   className="linea-y absolute bg-tinta"
-                  style={{ left: u(centro(c.id) - 1), top: suma(d.carpetaY, d.carpeta.alto), height: `calc(${uy(d.gente.y)} - ${suma(d.carpetaY, d.carpeta.alto)})`, width: u(3), animationDelay: ".75s" }}
+                  style={{ left: ux(centro(c.id) - 1), top: suma(d.carpetaY, d.carpeta.alto), height: `calc(${uy(d.gente.y)} - ${suma(d.carpetaY, d.carpeta.alto)})`, width: u(3), animationDelay: ".75s" }}
                 />
                 <i
                   className="punto-baja absolute box-border rounded-full border-2 border-tinta bg-turquesa"
-                  style={{ left: u(centro(c.id) - 6), top: suma(d.carpetaY, d.carpeta.alto + 2), width: u(13), height: u(13), animationDelay: `${0.9 + i * 0.15}s` }}
+                  style={{ left: ux(centro(c.id) - 6), top: suma(d.carpetaY, d.carpeta.alto + 2), width: u(13), height: u(13), animationDelay: `${0.9 + i * 0.15}s` }}
                 />
               </span>
             ))}
@@ -381,7 +384,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
                   key={`${c.id}-${nombre}`}
                   className="abre absolute z-20 box-border flex items-center rounded-[4px] border-2 border-tinta bg-blanco leading-[1.1] font-extrabold"
                   style={{
-                    left: u(centro(c.id) - d.gente.w / 2),
+                    left: centrado(centro(c.id), d.gente.w),
                     top: uy(d.gente.y + j * d.gente.dy),
                     width: u(d.gente.w),
                     minHeight: u(d.gente.letra * 2.7),
@@ -403,9 +406,9 @@ export default function Escritorio({ modo }: { modo: Modo }) {
           <p
             className="abre absolute z-20 m-0 box-border flex items-center rounded-[4px] bg-tinta font-bold text-blanco"
             style={{
-              left: u(d.lema.x),
+              left: ux(d.lema.x),
               top: uy(d.lema.y),
-              width: u(d.lema.w),
+              width: ux(d.lema.w),
               gap: u(12),
               padding: `${u(d.lema.letra * 0.8)} ${u(d.lema.letra)}`,
               fontSize: u(d.lema.letra),
@@ -438,7 +441,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
             onClick={(e) => picar(e, c.id)}
             className="cosa mov absolute flex flex-col items-center border-0 bg-transparent"
             style={{
-              left: u(enApp ? d.enApp.x : x),
+              left: ux(enApp ? d.enApp.x : x),
               top: uy(enApp ? d.enApp.y + i * d.enApp.dy : y),
               width: u(d.carpeta.w),
               padding: u(4),
@@ -489,7 +492,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
             onClick={(e) => picar(e, f.id)}
             className="cosa mov group absolute flex flex-col items-center border-0 bg-transparent"
             style={{
-              left: u(destino ? destino.x + d.carpeta.w * 0.08 : x0),
+              left: ux(destino ? destino.x + d.carpeta.w * 0.08 : x0),
               top: uy(destino ? destino.y + 4 : y0),
               width: u(d.archivo.w),
               padding: u(4),
@@ -544,7 +547,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
           aria-labelledby={`alerta-titulo-${modo}`}
           aria-describedby={`alerta-duda-${modo}`}
           className="abre absolute z-[80] rounded-[4px] border-2 border-tinta bg-blanco shadow-[5px_5px_0_var(--color-tinta)]"
-          style={{ left: u(d.alerta.x), top: uy(d.alerta.y), width: u(d.alerta.w) }}
+          style={{ left: ux(d.alerta.x), top: uy(d.alerta.y), width: u(d.alerta.w) }}
         >
           <div className="relative border-b-2 border-tinta bg-violeta" style={{ height: u(30) }}>
             <span
@@ -559,7 +562,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
               onClick={cerrarAlerta}
               aria-label="Cerrar ventana"
               className="absolute cursor-pointer border-2 border-tinta bg-blanco p-0 active:bg-tinta"
-              style={{ left: u(8), top: u(3), width: u(20), height: u(20) }}
+              style={{ left: ux(8), top: u(3), width: u(20), height: u(20) }}
             />
           </div>
           <div className="flex" style={{ gap: u(14), padding: `${u(16)} ${u(16)} ${u(6)}` }}>
@@ -594,14 +597,14 @@ export default function Escritorio({ modo }: { modo: Modo }) {
       {enApp && (
         <section
           aria-label="Tu negocio en una app"
-          className="abre absolute z-50 rounded-[4px] border-2 border-tinta bg-blanco shadow-[6px_6px_0_var(--color-tinta)]"
-          style={{ left: u(d.app.x), top: uy(d.app.y), width: u(d.app.w) }}
+          className="abre absolute z-50 overflow-hidden rounded-[4px] border-2 border-tinta bg-blanco shadow-[6px_6px_0_var(--color-tinta)]"
+          style={{ left: ux(d.app.x), top: uy(d.app.y), width: ux(d.app.w), maxHeight: cel ? "calc(100% - 56px)" : undefined }}
         >
           <div className="relative border-b-2 border-tinta bg-violeta" style={{ height: u(30) }}>
             <span
               aria-hidden
               className="absolute box-border border-2 border-tinta bg-blanco"
-              style={{ left: u(8), top: u(3), width: u(20), height: u(20) }}
+              style={{ left: ux(8), top: u(3), width: u(20), height: u(20) }}
             />
             <span
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-marca whitespace-nowrap text-blanco italic"
@@ -627,7 +630,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
                     className={`flex cursor-pointer items-center rounded-[4px] border-2 border-tinta font-extrabold text-tinta ${
                       d.app.lateral ? "text-left" : "justify-center"
                     } ${activo ? "bg-turquesa" : "bg-blanco shadow-[0_3px_0_var(--color-tinta)]"}`}
-                    style={{ minHeight: 44, gap: u(8), paddingInline: u(d.app.lateral ? 10 : 2), fontSize: u(d.app.lateral ? 15 : 12) }}
+                    style={{ minHeight: d.app.lateral ? 44 : 40, gap: u(8), paddingInline: u(d.app.lateral ? 10 : 2), fontSize: u(d.app.lateral ? 15 : 12) }}
                   >
                     {d.app.lateral && <IconoCarpeta ancho={22} relleno="#fff" trazo={6} />}
                     {c.nombre}
@@ -652,7 +655,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
                   <li
                     key={`${modulo}-${fila.texto}`}
                     className="asoma flex items-center justify-between rounded-[4px] border-2 border-tinta font-semibold"
-                    style={{ gap: u(8), padding: d.app.lateral ? `${u(12)} ${u(14)}` : `${u(8)} ${u(10)}`, fontSize: u(d.app.lateral ? 16 : 13) }}
+                    style={{ gap: u(8), padding: d.app.lateral ? `${u(12)} ${u(14)}` : `${u(6)} ${u(10)}`, fontSize: u(d.app.lateral ? 16 : 13) }}
                   >
                     <span>{fila.texto}</span>
                     <span
@@ -666,17 +669,19 @@ export default function Escritorio({ modo }: { modo: Modo }) {
               </ul>
               <p
                 className="m-0 flex items-center rounded-[4px] bg-tinta font-bold text-blanco"
-                style={{ gap: u(10), padding: d.app.lateral ? `${u(12)} ${u(14)}` : `${u(8)} ${u(10)}`, fontSize: u(d.app.lateral ? 15 : 12.5) }}
+                style={{ gap: u(10), padding: d.app.lateral ? `${u(12)} ${u(14)}` : `${u(6)} ${u(10)}`, fontSize: u(d.app.lateral ? 15 : 12.5) }}
               >
                 <Robot />
                 {mod.auto}
               </p>
             </div>
           </div>
-          <div className="flex justify-between border-t-2 border-tinta bg-turquesa font-extrabold" style={{ padding: `${u(4)} ${u(10)}`, fontSize: u(11) }}>
-            <span>4 áreas, un solo lugar</span>
-            <span>en línea</span>
-          </div>
+          {d.app.lateral && (
+            <div className="flex justify-between border-t-2 border-tinta bg-turquesa font-extrabold" style={{ padding: `${u(4)} ${u(10)}`, fontSize: u(11) }}>
+              <span>4 áreas, un solo lugar</span>
+              <span>en línea</span>
+            </div>
+          )}
         </section>
       )}
 
@@ -686,7 +691,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
           role="group"
           aria-label="Pasos"
           className="asoma absolute z-40 flex justify-center"
-          style={{ left: u(d.pasos.x), top: uy(d.pasos.y), width: u(d.pasos.w), gap: u(cel ? 8 : 10) }}
+          style={cel ? { left: 0, right: 0, bottom: 2, gap: 8 } : { left: ux(d.pasos.x), top: uy(d.pasos.y), width: ux(d.pasos.w), gap: u(10) }}
         >
           {PASOS.map((p) => (
             <button
@@ -697,7 +702,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
               className={`cursor-pointer rounded-full border-2 border-tinta font-extrabold text-tinta ${
                 paso === p.n ? "bg-turquesa" : "bg-blanco"
               }`}
-              style={{ minHeight: 44, paddingInline: u(cel ? 14 : 16), fontSize: u(cel ? 14 : 15) }}
+              style={cel ? { minHeight: 44, paddingInline: 14, fontSize: 14 } : { minHeight: 44, paddingInline: u(16), fontSize: u(15) }}
             >
               {p.etiqueta}
             </button>
@@ -707,7 +712,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
         cel && (
           <p
             className="absolute z-10 m-0 flex items-center justify-center font-semibold text-tinta/75"
-            style={{ left: u(d.pasos.x), top: uy(d.pasos.y + 16), width: u(d.pasos.w), gap: u(6), fontSize: u(13) }}
+            style={{ left: ux(d.pasos.x), top: uy(d.pasos.y + 16), width: ux(d.pasos.w), gap: u(6), fontSize: u(13) }}
           >
             <Pista tam={u(15)} corta />
           </p>
@@ -728,23 +733,29 @@ export default function Escritorio({ modo }: { modo: Modo }) {
   if (cel) {
     return (
       <div className="flex h-full flex-col">
-        <div className="flex flex-col gap-3 px-4 pb-3">
+        <div className="flex shrink-0 flex-col gap-[min(12px,1.4svh)] px-4">
           {titular}
-          <p className="m-0 text-[17px] leading-[1.2] font-semibold">{hero.subtitulo}</p>
-          <div className="flex gap-2.5">
-            {botonHablemos({ gap: 8, paddingInline: 12 }, "flex-1")}
-            {botonDespegar({ paddingInline: 12 }, "flex-1")}
-          </div>
+          <p className="m-0 text-[clamp(14px,2.2svh,17px)] leading-[1.2] font-semibold">{hero.subtitulo}</p>
         </div>
-        <div className="relative min-h-[340px] flex-1 [container-type:size]">
+        <div className="relative min-h-0 flex-1 [container-type:size]">
           <div
             ref={escenario}
             className="absolute inset-0"
-            style={{ "--u": `calc(100cqw / ${d.ancho})`, "--v": `calc(100cqh / ${d.alto})` } as CSSProperties}
+            style={
+              {
+                "--x": `calc(100cqw / ${d.ancho})`,
+                "--v": `calc(100cqh / ${d.alto})`,
+                "--u": `min(calc(100cqw / ${d.ancho}), calc(100cqh / ${d.alto}))`,
+              } as CSSProperties
+            }
             {...eventosEscenario}
           >
             {escenarioContenido}
           </div>
+        </div>
+        <div className="flex shrink-0 gap-2.5 px-4 pt-2">
+          {botonHablemos({ gap: 8, paddingInline: 10, marginBottom: 5 }, "flex-1 whitespace-nowrap text-[clamp(14px,4.3vw,16px)]")}
+          {botonDespegar({ paddingInline: 10, marginBottom: 5 }, "flex-1 whitespace-nowrap text-[clamp(14px,4.3vw,16px)]")}
         </div>
       </div>
     );
@@ -753,7 +764,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
   return (
     <div ref={escenario} className="relative mx-auto" style={{ width: u(d.ancho), height: u(d.alto) }} {...eventosEscenario}>
       {/* Titular */}
-      <div className="absolute z-40 flex flex-col" style={{ left: u(96), top: u(70), width: u(620), gap: u(26) }}>
+      <div className="absolute z-40 flex flex-col" style={{ left: ux(96), top: u(70), width: u(620), gap: u(26) }}>
         {titular}
         <p className="m-0 leading-[1.2] font-semibold" style={{ fontSize: u(25), maxWidth: u(540) }}>
           {hero.subtitulo}
