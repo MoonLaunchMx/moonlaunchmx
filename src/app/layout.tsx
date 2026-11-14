@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/epilogue";
 import "./globals.css";
+import Agenda from "@/components/Agenda";
 import { contacto } from "@/lib/site";
 
 const descripcion =
@@ -8,14 +9,14 @@ const descripcion =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.moonlaunch.mx"),
-  title: { default: "Moon Launch · Automatiza. Ordena. Despega.", template: "%s · Moon Launch" },
+  title: { default: "Moon Launch · Ordena. Automatiza. Despega.", template: "%s · Moon Launch" },
   description: descripcion,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "es_MX",
     siteName: "Moon Launch",
-    title: "Moon Launch · Automatiza. Ordena. Despega.",
+    title: "Moon Launch · Ordena. Automatiza. Despega.",
     description: descripcion,
   },
   robots: { index: true, follow: true },
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-dvh">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizacion) }} />
         {children}
+        <Agenda />
       </body>
     </html>
   );

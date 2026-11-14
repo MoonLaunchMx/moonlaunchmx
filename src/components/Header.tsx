@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { abrirAgenda } from "@/components/Agenda";
 import Logo from "@/components/Logo";
 import { menu, waAgendar } from "@/lib/site";
 
@@ -21,7 +22,7 @@ export default function Header({ volverA }: { volverA?: { href: string; label: s
   }, []);
 
   return (
-    <header className="sticky top-2.5 z-30 mx-auto mt-2.5 max-w-2xl px-2.5 lg:top-4 lg:mt-4 lg:max-w-6xl lg:px-6">
+    <header className="sticky top-2.5 z-30 mx-auto mt-2.5 max-w-2xl px-2.5 lg:top-4 lg:mt-4 lg:max-w-none lg:w-[90%] lg:px-0">
       <div className="flex items-center justify-between gap-2 rounded-[6px] border-2 border-tinta bg-blanco py-1.5 pr-1.5 pl-2.5 shadow-[0_4px_0_var(--color-tinta)]">
         <Logo />
         {/* Escritorio: el menú se ve completo en la barra en lugar del botón "Menú". */}
@@ -42,9 +43,9 @@ export default function Header({ volverA }: { volverA?: { href: string; label: s
             ))}
         </nav>
         <div className="flex items-center gap-1.5 pb-[5px]">
-          <a href={waAgendar} target="_blank" rel="noopener noreferrer" className={`${pildoraBtn} bg-violeta text-blanco`}>
+          <button type="button" onClick={abrirAgenda} aria-haspopup="dialog" className={`${pildoraBtn} bg-violeta text-blanco`}>
             Agendar
-          </a>
+          </button>
           {volverA ? (
             <Link href={volverA.href} className={`${pildoraBtn} bg-blanco text-tinta`}>
               ← {volverA.label}

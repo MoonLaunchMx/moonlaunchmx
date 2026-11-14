@@ -67,19 +67,121 @@ export const calculadora = {
   costo: { min: 50, max: 400, paso: 10, inicial: 100 },
 };
 
-/** Sección "Simplificamos": cada ícono abre su ventana. Las líneas con ">" son herramientas. */
+/** Hero (aprobado 13 nov 2026). */
+export const hero = {
+  titular: ["Ordena.", "Automatiza.", "Despega."],
+  subtitulo: "Simplificamos la tecnología para pymes y emprendedores.",
+};
+
+/**
+ * Hero de escritorio "la compu de tu negocio" (aprobado 13 nov 2026). Mockup:
+ * https://claude.ai/artifact/NRvvy4x6GpMWkz3uDfNGJv
+ * Coordenadas en px de un diseño de 1440 de ancho; el escenario escala con la pantalla.
+ */
+export const escritorio = {
+  carpetas: [
+    { id: "ventas", nombre: "Ventas", caos: { x: 1180, y: 18, r: -6 }, orden: { x: 860, y: 90 }, arbol: { x: 758, y: 154 }, gente: ["Vendedores", "Clientes"] },
+    { id: "compras", nombre: "Compras", caos: { x: 820, y: 470, r: 8 }, orden: { x: 1100, y: 90 }, arbol: { x: 918, y: 154 }, gente: ["Proveedores", "Tú apruebas"] },
+    { id: "inventario", nombre: "Inventario", caos: { x: 1280, y: 400, r: -10 }, orden: { x: 860, y: 330 }, arbol: { x: 1078, y: 154 }, gente: ["Almacén", "Reparto"] },
+    { id: "cobranza", nombre: "Cobranza", caos: { x: 610, y: 645, r: 5 }, orden: { x: 1100, y: 330 }, arbol: { x: 1238, y: 154 }, gente: ["Contador", "Bancos"] },
+  ],
+  archivos: [
+    { id: "xls1", nombre: "ventas_FINAL_v3.xlsx", tipo: "XLS", carpeta: "ventas", x: 790, y: 28, r: -8, duda: "¿Esta es la buena o era la v2?" },
+    { id: "csv", nombre: "existencias_marzo.csv", tipo: "CSV", carpeta: "inventario", x: 985, y: 10, r: -14, duda: "Es de marzo. ¿Alguien la actualizó?" },
+    { id: "sh1", nombre: "Compras 2026", tipo: "SHEETS", carpeta: "compras", x: 975, y: 162, r: 6, duda: "La llenan tres personas. Cada quien a su modo." },
+    { id: "xls2", nombre: "inventario copia (2).xlsx", tipo: "XLS", carpeta: "inventario", x: 1130, y: 230, r: -4, duda: "¿Copia de qué? ¿Y dónde quedó la (1)?" },
+    { id: "pdf1", nombre: "factura_0031.pdf", tipo: "PDF", carpeta: "cobranza", x: 850, y: 300, r: 12, duda: "¿Ya la pagaron? Toca revisar el banco." },
+    { id: "wa", nombre: "pedido WhatsApp.jpg", tipo: "IMG", carpeta: "ventas", x: 1295, y: 190, r: 7, duda: "Una captura de un pedido. Ojalá alguien lo haya anotado." },
+    { id: "pdf2", nombre: "estado_de_cuenta.pdf", tipo: "PDF", carpeta: "cobranza", x: 720, y: 420, r: -9, duda: "Lo descargas cada mes, a mano." },
+    { id: "doc", nombre: "cotizacion_nueva.docx", tipo: "DOC", carpeta: "ventas", x: 1185, y: 605, r: -12, duda: "Se tardó un día. El cliente ya compró en otro lado." },
+    { id: "sh2", nombre: "proveedores", tipo: "SHEETS", carpeta: "compras", x: 930, y: 635, r: 9, duda: "Los teléfonos están en otra hoja. Creo." },
+    { id: "nota", nombre: "¡Cobrar el jueves!", tipo: "NOTA", carpeta: "cobranza", x: 1030, y: 460, r: -7, duda: "¿Cuál jueves? ¿A quién?" },
+  ],
+  arbolLema: "Cada quien ve lo suyo. Lo que se repite entre áreas, se hace solo.",
+  /** Ventana tu-negocio.app del paso 3. Datos de ejemplo, nunca de clientes reales. */
+  modulos: {
+    ventas: {
+      titulo: "Pedidos de hoy",
+      auto: "Cada pedido de WhatsApp entra aquí solo.",
+      filas: [
+        { texto: "Pedido 104 · 3 cajas", estado: "listo", tono: "t" },
+        { texto: "Pedido 105 · por WhatsApp", estado: "nuevo", tono: "v" },
+        { texto: "Cotización enviada", estado: "en 30 s", tono: "b" },
+      ],
+    },
+    compras: {
+      titulo: "Proveedores",
+      auto: "Al llegar al mínimo, la orden de compra sale sola.",
+      filas: [
+        { texto: "Materia prima", estado: "se pide el lunes", tono: "b" },
+        { texto: "Empaques", estado: "llega mañana", tono: "t" },
+        { texto: "Orden 22", estado: "enviada sola", tono: "v" },
+      ],
+    },
+    inventario: {
+      titulo: "Existencias",
+      auto: "Cada venta descuenta del inventario al momento.",
+      filas: [
+        { texto: "Producto A · 120 piezas", estado: "bien", tono: "t" },
+        { texto: "Producto B · quedan 8", estado: "pedir", tono: "v" },
+        { texto: "Producto C · 46 piezas", estado: "bien", tono: "t" },
+      ],
+    },
+    cobranza: {
+      titulo: "Quién te debe",
+      auto: "Los recordatorios de pago salen solos por WhatsApp.",
+      filas: [
+        { texto: "Cliente A · vence hoy", estado: "recordatorio enviado", tono: "v" },
+        { texto: "Cliente B", estado: "pagado", tono: "t" },
+        { texto: "Cliente C · vence el viernes", estado: "en espera", tono: "b" },
+      ],
+    },
+  },
+} as const;
+
+/**
+ * Agenda "Hablemos" (aprobada 13 nov 2026): el cliente elige día y hora y se abre WhatsApp con el mensaje listo.
+ * No revisa la disponibilidad real de Diego; él confirma por WhatsApp. Pendiente: Programa de citas de Google.
+ */
+export const agenda = {
+  boton: "Hablemos",
+  titulo: "Agenda tu videollamada",
+  nota: "Diagnóstico de 45 min, sin costo. Diego te confirma por WhatsApp.",
+  /** [Pendiente de Diego: confirmar horarios reales] Hora de CDMX, lunes a viernes. */
+  horas: ["10:00", "11:00", "12:00", "13:00", "16:00", "17:00"],
+  diasAdelante: 30,
+  mensaje: (nombre: string, negocio: string, fecha: string, hora: string) =>
+    `Hola Diego, soy ${nombre}${negocio ? ` de ${negocio}` : ""}. Quisiera agendar una videollamada contigo el ${fecha} a las ${hora} (hora de CDMX).`,
+};
+
+/**
+ * Sección "Simplificamos". Celular: cada ícono abre su ventana (las líneas con ">" son herramientas).
+ * Escritorio: banner con pestañas pegadas a una ventana a todo lo ancho (aprobado 13 nov 2026).
+ */
 export const simplificamos = [
   {
     nombre: "Digitalizamos",
     lineas: ["Del papel y el Excel", "a un sistema que todos ven.", "", "> Google Sheets", "> Odoo", "> App propia"],
+    que: "Del papel y los Excel sueltos a un sistema que todo tu equipo ve.",
+    ejemplo: "El inventario que llevabas en un cuaderno pasa a una hoja que todos ven desde el celular.",
+    gana: "Nada se pierde y nadie pregunta «¿en qué va?».",
+    herramientas: ["Google Sheets", "Odoo", "App propia"],
   },
   {
     nombre: "Automatizamos",
     lineas: ["Lo que hoy alguien copia a mano,", "se hace solo.", "", "> n8n", "> Make", "> WhatsApp Business"],
+    que: "Lo que hoy alguien copia y pega todos los días, se hace solo.",
+    ejemplo: "Registras una venta y esa pieza se descuenta sola del inventario.",
+    gana: "Horas libres cada semana para vender.",
+    herramientas: ["n8n", "Make", "WhatsApp Business"],
   },
   {
     nombre: "Analizamos",
     lineas: ["Cuánto vendes, cuánto te cuesta", "y quién te debe.", "", "> Tableros", "> Reportes automáticos"],
+    que: "Tus números claros: cuánto vendes, cuánto te cuesta y quién te debe.",
+    ejemplo: "Cada lunes te llega un resumen de la semana y lo que falta cobrar.",
+    gana: "Decides con datos, no con corazonadas.",
+    herramientas: ["Tu Google Sheets o Excel", "Tableros", "Reportes automáticos"],
   },
 ] as const;
 
