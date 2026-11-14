@@ -170,8 +170,18 @@ export default function Escritorio({ modo }: { modo: Modo }) {
 
   const escenario = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
-  const arrastre = useRef<{ id: string; sx: number; sy: number; ox: number; oy: number; kx: number; ky: number; movido: boolean } | null>(null);
-  const seMovio = useRef(false);
+  const arrastre = useRef<{
+    id: string;
+    el: HTMLButtonElement;
+    sx: number;
+    sy: number;
+    ox: number;
+    oy: number;
+    kx: number;
+    ky: number;
+    umbral: number;
+    movido: boolean;
+  } | null>(null);
   const zTop = useRef(30);
   const origenAlerta = useRef<HTMLButtonElement | null>(null);
   const niIdea = useRef<HTMLButtonElement>(null);
@@ -234,38 +244,60 @@ export default function Escritorio({ modo }: { modo: Modo }) {
 
   function bajar(e: EventoPuntero<HTMLButtonElement>, id: string, x: number, y: number) {
     if (paso !== 0 || e.button !== 0) return;
-    e.currentTarget.setPointerCapture(e.pointerId);
+    const el = e.currentTarget;
+    try {
+      el.setPointerCapture(e.pointerId);
+    } catch {}
     const caja = escenario.current!.getBoundingClientRect();
-    arrastre.current = { id, sx: e.clientX, sy: e.clientY, ox: x, oy: y, kx: caja.width / d.ancho, ky: caja.height / d.alto, movido: false };
+    arrastre.current = {
+      id,
+      el,
+      sx: e.clientX,
+      sy: e.clientY,
+      ox: x,
+      oy: y,
+      kx: caja.width / d.ancho,
+      ky: caja.height / d.alto,
+      // Con el dedo hay más temblor: hace falta moverlo más para que cuente como arrastre.
+      umbral: e.pointerType === "touch" ? 10 : 5,
+      movido: false,
+    };
     const nz = ++zTop.current;
     setZ((prev) => ({ ...prev, [id]: nz }));
   }
   function mover(e: EventoPuntero<HTMLDivElement>) {
     const a = arrastre.current;
     if (!a) return;
+    if (!a.movido && Math.abs(e.clientX - a.sx) + Math.abs(e.clientY - a.sy) < a.umbral) return;
+    a.movido = true;
     const dx = (e.clientX - a.sx) / a.kx;
     const dy = (e.clientY - a.sy) / a.ky;
-    if (!a.movido && Math.abs(dx) + Math.abs(dy) < 5) return;
-    a.movido = true;
     setArrastrando(a.id);
     setPos((prev) => ({
       ...prev,
       [a.id]: { x: Math.max(0, Math.min(d.ancho - d.carpeta.w, a.ox + dx)), y: Math.max(0, Math.min(d.limiteY, a.oy + dy)) },
     }));
   }
+  // Al soltar sin haber arrastrado es un toque: se abre la duda del archivo. No esperamos el "click",
+  // que algunos navegadores de celular no disparan después de capturar el puntero.
   function soltar() {
     const a = arrastre.current;
     if (!a) return;
     arrastre.current = null;
-    seMovio.current = a.movido;
+    setArrastrando(null);
+    if (!a.movido) {
+      origenAlerta.current = a.el;
+      setAlerta(a.id);
+    }
+  }
+  // El navegador se quedó con el gesto (por ejemplo, para hacer scroll): ni arrastre ni toque.
+  function cancelar() {
+    arrastre.current = null;
     setArrastrando(null);
   }
-  // Un clic sin arrastre (o Enter/Espacio con teclado) abre la duda del archivo.
+  // Teclado (Enter/Espacio): el clic llega sin puntero (detail 0) y abre la duda.
   function picar(e: React.MouseEvent<HTMLButtonElement>, id: string) {
-    if (seMovio.current) {
-      seMovio.current = false;
-      return;
-    }
+    if (e.detail !== 0) return;
     origenAlerta.current = e.currentTarget;
     setAlerta(id);
   }
@@ -450,6 +482,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
               opacity: enApp || juntas ? 0 : 1,
               zIndex: z[c.id] ?? 20,
               pointerEvents: paso === 0 ? "auto" : "none",
+              touchAction: cel ? "pan-y" : "none",
               transition: transicion(arrastrando === c.id, retraso),
             }}
           >
@@ -501,6 +534,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
               opacity: destino ? 0 : 1,
               zIndex: z[f.id] ?? 25,
               pointerEvents: paso === 0 ? "auto" : "none",
+              touchAction: cel ? "pan-y" : "none",
               transition: transicion(arrastrando === f.id, retraso, 450),
             }}
           >
@@ -724,7 +758,7 @@ export default function Escritorio({ modo }: { modo: Modo }) {
   const eventosEscenario = {
     onPointerMove: mover,
     onPointerUp: soltar,
-    onPointerCancel: soltar,
+    onPointerCancel: cancelar,
     onKeyDown: (e: React.KeyboardEvent) => {
       if (e.key === "Escape" && laAlerta) cerrarAlerta();
     },
