@@ -7,7 +7,8 @@ type Marco = { x: number; y: number; w: number; h: number };
 type Item = (typeof simplificamos)[number];
 
 const MARGEN = 16;
-const ARRIBA = 196;
+// La ventana sale arriba, debajo del título, y empuja los botones (que viven al fondo, zona del pulgar).
+const HOLGURA_ARRASTRE = 40;
 const PASOS = 6;
 
 function reducirMovimiento() {
@@ -47,9 +48,10 @@ export function IconoApp({ nombre }: { nombre: Item["nombre"] }) {
   );
 }
 
-/** "Simplificamos la tecnología": cada ícono abre una ventana de sistema operativo viejo (aprobado 3 nov 2026). */
+/** "Así te ayudamos" (celular): cada ícono abre una ventana de sistema operativo viejo (aprobado 3 nov 2026; botones abajo, 13 nov 2026). */
 export default function Simplificamos() {
   const escenario = useRef<HTMLDivElement>(null);
+  const hueco = useRef<HTMLDivElement>(null);
   const cerrarRef = useRef<HTMLButtonElement>(null);
   const origen = useRef<HTMLButtonElement | null>(null);
   const arrastre = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null);
@@ -70,7 +72,8 @@ export default function Simplificamos() {
     const caja = escenario.current!.getBoundingClientRect();
     const icono = boton.firstElementChild!.getBoundingClientRect();
     const de: Marco = { x: icono.left - caja.left, y: icono.top - caja.top, w: icono.width, h: icono.height };
-    const a: Marco = { x: MARGEN, y: ARRIBA, w: caja.width - MARGEN * 2, h: 210 };
+    const arriba = hueco.current!.getBoundingClientRect().top - caja.top + 16; // + el mt-4 que toma al abrirse
+    const a: Marco = { x: MARGEN, y: arriba, w: caja.width - MARGEN * 2, h: 210 };
 
     if (reducirMovimiento()) {
       setAbierta(item);
@@ -116,16 +119,75 @@ export default function Simplificamos() {
   return (
     <div
       ref={escenario}
-      className="escritorio borde relative min-h-[440px] overflow-hidden p-4"
+      className="escritorio borde relative flex min-h-[440px] flex-col overflow-hidden p-4"
       onKeyDown={(e) => {
         if (e.key === "Escape" && abierta) cerrar();
       }}
     >
       <h2 id="simplificamos" className="titulo-seccion text-blanco">
-        Simplificamos la tecnología para pymes y emprendedores.
+        Así te ayudamos.
       </h2>
 
-      <div className="mt-5 grid grid-cols-3 gap-2">
+      {/* La ventana va en el flujo, entre el título y los botones: empuja los botones, nunca los tapa. */}
+      <div ref={hueco} className={abierta ? "mt-4" : ""}>
+        {abierta && (
+          <section
+            role="dialog"
+            aria-labelledby="simplificamos-titulo"
+            className="relative z-20 rounded-[4px] border-2 border-tinta bg-blanco shadow-[5px_5px_0_var(--color-tinta)]"
+            style={{ transform: `translate(${mover.x}px, ${mover.y}px)` }}
+          >
+            <div
+              className="barra-titulo relative h-[30px] cursor-grab border-b-2 border-tinta active:cursor-grabbing"
+              onPointerDown={(e) => {
+                if (e.target !== e.currentTarget) return;
+                e.currentTarget.setPointerCapture(e.pointerId);
+                arrastre.current = { x: e.clientX, y: e.clientY, ox: mover.x, oy: mover.y };
+              }}
+              onPointerMove={(e) => {
+                const a = arrastre.current;
+                if (!a || !e.currentTarget.hasPointerCapture(e.pointerId)) return;
+                setMover({
+                  x: Math.max(-MARGEN, Math.min(MARGEN, a.ox + e.clientX - a.x)),
+                  y: Math.max(-HOLGURA_ARRASTRE, Math.min(HOLGURA_ARRASTRE, a.oy + e.clientY - a.y)),
+                });
+              }}
+              onPointerUp={() => (arrastre.current = null)}
+            >
+              <button
+                ref={cerrarRef}
+                type="button"
+                onClick={cerrar}
+                aria-label="Cerrar ventana"
+                className="absolute top-[3px] left-2 size-5 border-2 border-tinta bg-blanco p-0 active:bg-tinta"
+              />
+              <span
+                id="simplificamos-titulo"
+                className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blanco px-2 text-[13px] font-extrabold whitespace-nowrap"
+              >
+                {abierta.nombre.toLowerCase()}.exe
+              </span>
+            </div>
+
+            <p className="sr-only">{abierta.lineas.filter(Boolean).join(" ").replace(/> /g, "")}</p>
+            <div aria-hidden className="min-h-[136px] p-3 font-mono text-[13px] leading-normal">
+              {visible.map((linea, i) => (
+                <div key={i} className={`min-h-[1.5em] ${linea.startsWith("C:") || linea.startsWith(">") ? "font-bold text-violeta" : ""}`}>
+                  {linea}
+                  {i === visible.length - 1 && <span className="cursor-terminal ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 bg-tinta" />}
+                </div>
+              ))}
+            </div>
+
+            <div className="flex justify-between border-t-2 border-tinta bg-turquesa px-2 py-1 text-[11px] font-bold">
+              <span>{abierta.lineas.filter((l) => l.startsWith(">")).length} herramientas</span>
+              <span>listo</span>
+            </div>
+          </section>
+        )}
+      </div>
+
+      <div className="mt-auto grid grid-cols-3 gap-2 pt-5">
         {simplificamos.map((item) => (
           <button
             key={item.nombre}
@@ -150,62 +212,6 @@ export default function Simplificamos() {
         />
       )}
 
-      {abierta && (
-        <section
-          role="dialog"
-          aria-labelledby="simplificamos-titulo"
-          className="absolute z-20 rounded-[4px] border-2 border-tinta bg-blanco shadow-[5px_5px_0_var(--color-tinta)]"
-          style={{ left: MARGEN, right: MARGEN, top: ARRIBA, transform: `translate(${mover.x}px, ${mover.y}px)` }}
-        >
-          <div
-            className="barra-titulo relative h-[30px] cursor-grab border-b-2 border-tinta active:cursor-grabbing"
-            onPointerDown={(e) => {
-              if (e.target !== e.currentTarget) return;
-              e.currentTarget.setPointerCapture(e.pointerId);
-              arrastre.current = { x: e.clientX, y: e.clientY, ox: mover.x, oy: mover.y };
-            }}
-            onPointerMove={(e) => {
-              const a = arrastre.current;
-              if (!a || !e.currentTarget.hasPointerCapture(e.pointerId)) return;
-              const alto = escenario.current!.clientHeight;
-              setMover({
-                x: Math.max(-MARGEN, Math.min(MARGEN, a.ox + e.clientX - a.x)),
-                y: Math.max(-ARRIBA + 8, Math.min(alto - ARRIBA - 80, a.oy + e.clientY - a.y)),
-              });
-            }}
-            onPointerUp={() => (arrastre.current = null)}
-          >
-            <button
-              ref={cerrarRef}
-              type="button"
-              onClick={cerrar}
-              aria-label="Cerrar ventana"
-              className="absolute top-[3px] left-2 size-5 border-2 border-tinta bg-blanco p-0 active:bg-tinta"
-            />
-            <span
-              id="simplificamos-titulo"
-              className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blanco px-2 text-[13px] font-extrabold whitespace-nowrap"
-            >
-              {abierta.nombre.toLowerCase()}.exe
-            </span>
-          </div>
-
-          <p className="sr-only">{abierta.lineas.filter(Boolean).join(" ").replace(/> /g, "")}</p>
-          <div aria-hidden className="min-h-[136px] p-3 font-mono text-[13px] leading-normal">
-            {visible.map((linea, i) => (
-              <div key={i} className={`min-h-[1.5em] ${linea.startsWith("C:") || linea.startsWith(">") ? "font-bold text-violeta" : ""}`}>
-                {linea}
-                {i === visible.length - 1 && <span className="cursor-terminal ml-0.5 inline-block h-3.5 w-2 translate-y-0.5 bg-tinta" />}
-              </div>
-            ))}
-          </div>
-
-          <div className="flex justify-between border-t-2 border-tinta bg-turquesa px-2 py-1 text-[11px] font-bold">
-            <span>{abierta.lineas.filter((l) => l.startsWith(">")).length} herramientas</span>
-            <span>listo</span>
-          </div>
-        </section>
-      )}
     </div>
   );
 }

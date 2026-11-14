@@ -38,7 +38,7 @@ export default function SimplificamosBanner() {
   return (
     <div className="flex flex-col gap-5">
       <h2 id="simplificamos-banner" className="titulo-seccion !text-4xl">
-        Simplificamos la tecnología.
+        Así te ayudamos.
       </h2>
 
       <div>
