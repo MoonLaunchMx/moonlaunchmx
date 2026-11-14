@@ -6,7 +6,7 @@ import OperacionSwitch from "@/components/OperacionSwitch";
 import Simplificamos from "@/components/Simplificamos";
 import SimplificamosBanner from "@/components/SimplificamosBanner";
 import type { CSSProperties } from "react";
-import { datos, dolores, hero, modalidades, waAgendar } from "@/lib/site";
+import { datos, dolores, modalidades, waAgendar } from "@/lib/site";
 
 const contenedor = "mx-auto max-w-2xl px-4";
 
@@ -21,23 +21,18 @@ export default function Home() {
           className="escritorio-claro relative isolate hidden pb-8 [container-type:inline-size] lg:-mt-20 lg:block lg:pt-[104px]"
         >
           <div style={{ "--u": "min(1px, calc(100cqw / 1440))" } as CSSProperties}>
-            <Escritorio />
+            <Escritorio modo="escritorio" />
           </div>
         </section>
 
-        {/* Celular: el hero de siempre, con el titular y subtítulo nuevos. */}
-        <section className="mx-auto flex max-w-2xl flex-col gap-[22px] px-4 pt-7 pb-10 lg:hidden">
-          <h1 className="m-0 text-[52px] leading-[0.9] font-extrabold tracking-[-0.045em]">
-            {hero.titular[0]}
-            <br />
-            {hero.titular[1]}
-            <br />
-            <span className="text-violeta">{hero.titular[2]}</span>
-          </h1>
-          <p className="m-0 text-xl leading-tight font-semibold">{hero.subtitulo}</p>
-          <a href="#os" className="btn bg-violeta text-blanco">
-            Agendar videollamada sin costo
-          </a>
+        {/* Celular: el mismo hero, del alto de la pantalla (debajo de la navbar flotante). */}
+        <section
+          aria-label="Ordena. Automatiza. Despega."
+          className="escritorio-claro relative isolate -mt-[74px] h-svh min-h-[640px] pt-[86px] pb-3 lg:hidden"
+        >
+          <div className="mx-auto h-full max-w-2xl">
+            <Escritorio modo="celular" />
+          </div>
         </section>
 
         {/* Simplificamos. Celular: la caja con ventanas, después del hero. Escritorio: banner compacto con pestañas. */}
