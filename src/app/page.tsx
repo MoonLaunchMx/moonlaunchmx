@@ -1,9 +1,12 @@
 import CalculadoraCaos from "@/components/CalculadoraCaos";
+import Escritorio from "@/components/Escritorio";
 import Header from "@/components/Header";
 import MoonOS from "@/components/MoonOS";
 import OperacionSwitch from "@/components/OperacionSwitch";
 import Simplificamos from "@/components/Simplificamos";
-import { datos, dolores, modalidades, waAgendar } from "@/lib/site";
+import SimplificamosBanner from "@/components/SimplificamosBanner";
+import type { CSSProperties } from "react";
+import { datos, dolores, hero, modalidades, waAgendar } from "@/lib/site";
 
 const contenedor = "mx-auto max-w-2xl px-4";
 
@@ -12,28 +15,38 @@ export default function Home() {
     <>
       <Header />
       <main>
-        {/* Celular: hero y Simplificamos uno debajo del otro. Escritorio: lado a lado. */}
-        <div className="mx-auto max-w-2xl lg:grid lg:max-w-6xl lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-12 lg:px-6 lg:pt-14 lg:pb-20">
-          <section className="flex flex-col gap-[22px] px-4 pt-7 pb-10 lg:gap-7 lg:p-0">
-            <h1 className="m-0 text-[52px] leading-[0.9] font-extrabold tracking-[-0.045em] lg:text-[84px] xl:text-[96px]">
-              Automatiza.
-              <br />
-              Ordena.
-              <br />
-              <span className="text-violeta">Despega.</span>
-            </h1>
-            <p className="m-0 text-xl leading-tight font-semibold lg:max-w-[26ch] lg:text-2xl">
-              Tu equipo trabaja más rápido, vende más y deja de apagar fuegos.
-            </p>
-            <a href="#os" className="btn bg-violeta text-blanco lg:self-start lg:px-7">
-              Agendar videollamada sin costo
-            </a>
-          </section>
+        {/* Escritorio: la compu de tu negocio, a todo lo ancho, debajo de la navbar flotante. */}
+        <section
+          aria-label="Ordena. Automatiza. Despega."
+          className="escritorio-claro relative isolate hidden pb-8 [container-type:inline-size] lg:-mt-20 lg:block lg:pt-[104px]"
+        >
+          <div style={{ "--u": "min(1px, calc(100cqw / 1440))" } as CSSProperties}>
+            <Escritorio />
+          </div>
+        </section>
 
-          <section className="px-4 pb-10 lg:p-0" aria-labelledby="simplificamos">
-            <Simplificamos />
-          </section>
-        </div>
+        {/* Celular: el hero de siempre, con el titular y subtítulo nuevos. */}
+        <section className="mx-auto flex max-w-2xl flex-col gap-[22px] px-4 pt-7 pb-10 lg:hidden">
+          <h1 className="m-0 text-[52px] leading-[0.9] font-extrabold tracking-[-0.045em]">
+            {hero.titular[0]}
+            <br />
+            {hero.titular[1]}
+            <br />
+            <span className="text-violeta">{hero.titular[2]}</span>
+          </h1>
+          <p className="m-0 text-xl leading-tight font-semibold">{hero.subtitulo}</p>
+          <a href="#os" className="btn bg-violeta text-blanco">
+            Agendar videollamada sin costo
+          </a>
+        </section>
+
+        {/* Simplificamos. Celular: la caja con ventanas, después del hero. Escritorio: banner compacto con pestañas. */}
+        <section className="mx-auto max-w-2xl px-4 pb-10 lg:hidden" aria-labelledby="simplificamos">
+          <Simplificamos />
+        </section>
+        <section className="mx-auto hidden max-w-6xl px-6 pt-10 pb-16 lg:block" aria-labelledby="simplificamos-banner">
+          <SimplificamosBanner />
+        </section>
 
         <section className={`${contenedor} flex flex-col gap-[18px] pb-10`} aria-labelledby="te-suena">
           <h2 id="te-suena" className="titulo-seccion">

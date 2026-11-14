@@ -105,11 +105,47 @@ body {
   background-image: radial-gradient(rgb(29 30 32 / 0.1) 1.2px, transparent 1.3px);
   background-size: 16px 16px;
 }
-.escritorio {
+/* Utilities (no clases sueltas) para poder usarlas con prefijos como max-lg: */
+@utility escritorio {
   background-color: var(--color-violeta);
   background-image: radial-gradient(rgb(255 255 255 / 0.22) 1.5px, transparent 1.6px);
   background-size: 16px 16px;
 }
+/* Hero de escritorio: papel con puntitos, retro pero limpio (aprobado 13 nov 2026) */
+@utility escritorio-claro {
+  background-color: var(--color-blanco);
+  background-image: radial-gradient(rgb(29 30 32 / 0.13) 1.3px, transparent 1.4px);
+  background-size: 20px 20px;
+}
+
+/* Hero de escritorio: árbol, ventanas y puntitos que corren */
+@keyframes crece-y {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes crece-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes baja {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(calc(var(--u, 1px) * 30)); opacity: 0.2; }
+}
+@keyframes abre {
+  from { opacity: 0; transform: scale(0.92) translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes asoma {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.linea-y { transform-origin: top; animation: crece-y 0.3s ease-out both; }
+.linea-x { transform-origin: center; animation: crece-x 0.35s ease-out both; }
+.punto-baja { animation: baja 1.1s linear infinite; }
+.abre { animation: abre 0.35s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+.asoma { animation: asoma 0.4s ease-out both; }
+.cosa { cursor: grab; touch-action: none; }
+.cosa:active { cursor: grabbing; }
 
 /* Switch "Tu operación / Con Moon Launch" */
 .pieza {
@@ -223,4 +259,7 @@ body {
   .pieza, .linea-viva { transition: none; }
   .vivo, .palomita { animation: none; }
   .pulso { display: none; }
+  .linea-y, .linea-x, .abre, .asoma { animation: none; }
+  .punto-baja { display: none; }
+  .mov { transition: none !important; }
 }

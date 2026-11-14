@@ -40,7 +40,7 @@ Diseño aprobado por Diego (2 nov 2026; adiciones del home el 3 nov): home + Ser
 "moonlaunch.mx · mockups" de Claude Design (https://claude.ai/artifact/9Hcdqub1etvDJdcUukLcYU).
 
 Decisiones que no se reabren sin brief nuevo:
-- Titular "Automatiza. Ordena. Despega.". Nada de "con app o sin app" ni "semanas"; el plazo es "meses, no años".
+- Titular "Ordena. Automatiza. Despega." (orden nuevo aprobado el 13 nov 2026). Nada de "con app o sin app" ni "semanas"; el plazo es "meses, no años".
 - Ventanas retro solo en el logo, en Moon OS (home), en el formulario de Contacto y en "Simplificamos" (home,
   aprobado 3 nov 2026: ventanas de sistema operativo viejo). El resto, tarjetas simples.
 - Poco texto: frases de una línea; las dudas se contestan a la vista, sin acordeones.

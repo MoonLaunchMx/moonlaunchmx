@@ -14,7 +14,7 @@ function reducirMovimiento() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-function IconoApp({ nombre }: { nombre: Item["nombre"] }) {
+export function IconoApp({ nombre }: { nombre: Item["nombre"] }) {
   // Digitalizamos: pantalla con código.
   if (nombre === "Digitalizamos")
     return (
