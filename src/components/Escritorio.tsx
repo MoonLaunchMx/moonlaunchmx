@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as EventoPuntero } from "react";
 import { abrirAgenda } from "@/components/Agenda";
+import { IconoCalendario } from "@/components/BotonHablemos";
 import { agenda, escritorio, hero } from "@/lib/site";
 
 /**
@@ -133,16 +134,6 @@ function Robot() {
       <circle cx="13.5" cy="18.5" r="2.5" fill="#fff" />
       <circle cx="22.5" cy="18.5" r="2.5" fill="#fff" />
       <path d="M18 11V6" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconoCalendario({ tam }: { tam: string }) {
-  return (
-    <svg viewBox="0 0 24 24" style={{ width: tam, height: tam }} className="shrink-0" aria-hidden>
-      <rect x="3" y="5" width="18" height="16" rx="2" fill="#fff" stroke="#1d1e20" strokeWidth="2" />
-      <path d="M3 10h18M8 3v4M16 3v4" stroke="#1d1e20" strokeWidth="2" strokeLinecap="round" />
-      <rect x="13" y="13" width="4" height="4" fill="#48c9b0" stroke="#1d1e20" strokeWidth="1.5" />
     </svg>
   );
 }

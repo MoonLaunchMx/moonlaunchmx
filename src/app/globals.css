@@ -263,3 +263,26 @@ body {
   .punto-baja { display: none; }
   .mov { transition: none !important; }
 }
+
+/* Banner de herramientas (17 nov 2026): corre solo; se pausa con el mouse o el foco. */
+.cinta {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.pista {
+  display: flex;
+  width: max-content;
+  animation: corre-cinta 34s linear infinite;
+}
+.cinta:hover .pista,
+.cinta:focus-within .pista {
+  animation-play-state: paused;
+}
+@keyframes corre-cinta {
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pista { animation: none; }
+  .cinta { overflow-x: auto; mask-image: none; }
+  .cinta .copia { display: none; }
+}

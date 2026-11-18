@@ -1,7 +1,9 @@
 import CalculadoraCaos from "@/components/CalculadoraCaos";
 import Escritorio from "@/components/Escritorio";
 import Header from "@/components/Header";
+import Herramientas from "@/components/Herramientas";
 import MoonOS from "@/components/MoonOS";
+import Planes from "@/components/Planes";
 import Simplificamos from "@/components/Simplificamos";
 import SimplificamosBanner from "@/components/SimplificamosBanner";
 import type { CSSProperties } from "react";
@@ -42,7 +44,11 @@ export default function Home() {
           <SimplificamosBanner />
         </section>
 
-        <section className={`${contenedor} flex flex-col gap-3.5 pb-12`} aria-labelledby="caos">
+        {/* Herramientas que implementamos y consultoría en transformación digital (aprobado 17 nov 2026). */}
+        <Herramientas />
+        <Planes />
+
+        <section className={`${contenedor} flex flex-col gap-3.5 pt-10 pb-12`} aria-labelledby="caos">
           <h2 id="caos" className="titulo-seccion">
             ¿Cuánto te cuesta el caos?
           </h2>

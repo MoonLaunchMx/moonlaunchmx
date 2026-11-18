@@ -215,3 +215,69 @@ export const posts = [
   { slug: null, titulo: "¿Mi Excel ya no da más?", minutos: 4 },
   { slug: null, titulo: "Qué automatizar primero", minutos: 5 },
 ];
+
+/** Banner "Herramientas que implementamos" (aprobado 17 nov 2026). Abajo de cada logo va la categoría. */
+export const herramientas = {
+  titulo: "Herramientas que implementamos",
+  lista: [
+    { nombre: "Claude", categoria: "IA", logo: "claude" },
+    { nombre: "Odoo", categoria: "ERP", logo: "odoo" },
+    { nombre: "n8n", categoria: "Automatización", logo: "n8n" },
+    { nombre: "Google Workspace", categoria: "Productividad", logo: "google" },
+    { nombre: "WhatsApp Business", categoria: "Mensajería", logo: "whatsapp" },
+    { nombre: "ChatGPT", categoria: "IA", logo: "openai" },
+    { nombre: "Make", categoria: "Automatización", logo: "make" },
+    { nombre: "Crisp", categoria: "Chatbot", icono: iconos.chat },
+    { nombre: "Tableros", categoria: "Analítica", icono: iconos.barras },
+    { nombre: "Gemini", categoria: "IA", logo: "gemini" },
+    { nombre: "Zapier", categoria: "Automatización", logo: "zapier" },
+    { nombre: "Microsoft 365", categoria: "Productividad", icono: "M3 3h8v8H3z M13 3h8v8h-8z M3 13h8v8H3z M13 13h8v8h-8z" },
+    { nombre: "ManyChat", categoria: "Marketing", icono: iconos.chat },
+    { nombre: "Perplexity", categoria: "IA", logo: "perplexity" },
+    { nombre: "Fireflies", categoria: "Reuniones", icono: "M3 6h13v12H3z M16 10l5-3v10l-5-3" },
+    { nombre: "Apps internas", categoria: "Desarrollo", icono: "M7 2h10v20H7z M11 18h2" },
+  ],
+} as const;
+
+/** "Consultoría en transformación digital" (aprobado 17 nov 2026). Sin horas: cada empresa se cotiza aparte. */
+export const consultoria = {
+  titulo: "Consultoría en transformación digital.",
+  linea: "Cotizamos según tu equipo y tus herramientas.",
+  metodoLabel: "Así trabajamos en los 3 planes",
+  metodo: [
+    { nombre: "Mapeamos", linea: "Tus procesos, uno por uno.", icono: "M10 4a6 6 0 1 0 0.01 0 M15 15l5 5" },
+    { nombre: "Gestionamos", linea: "Plan y entregas claras.", icono: "M3 4h18v12H3z M8 20h8 M12 16v4" },
+    { nombre: "Implementamos", linea: "Configuramos y probamos.", icono: "M12 8a4 4 0 1 0 0.01 0 M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" },
+    { nombre: "Despegamos", linea: "Capacitamos a tu equipo.", icono: "M12 2c3 3 4 7 3 12h-6C8 9 9 5 12 2z M9 14l-3 4h4 M15 14l3 4h-4 M12 8v2" },
+  ],
+  recomendado: "Recomendado",
+  planes: [
+    {
+      nombre: "Rumbo",
+      para: "Para equipos de 1 a 10 personas",
+      desde: "Desde",
+      precio: "$11,500",
+      nota: "+ IVA al mes",
+      recomendado: false,
+      incluye: ["Mapa de tus procesos y arquitectura digital", "Implementación con nuestro método", "Consultoría mensual", "Soporte por WhatsApp"],
+    },
+    {
+      nombre: "Copiloto",
+      para: "Para equipos de 10 a 20 personas",
+      desde: "Desde",
+      precio: "$19,500",
+      nota: "+ IVA al mes",
+      recomendado: true,
+      incluye: ["Todo lo de Rumbo", "Procedimientos documentados", "Seguimiento semanal por videollamada", "Auditoría y mejoras cada mes"],
+    },
+    {
+      nombre: "Control de misión",
+      para: "Para equipos de más de 20 personas",
+      desde: "",
+      precio: "Contáctanos",
+      nota: "Cotizamos a tu medida",
+      recomendado: false,
+      incluye: ["Todo lo de Copiloto", "Capacitación continua a tu equipo", "Coordinamos a tus proveedores", "Atención prioritaria"],
+    },
+  ],
+} as const;
