@@ -41,18 +41,6 @@ export const iconos = {
   enviar: "M12 19V5M5 12l7-7 7 7",
 };
 
-/** Las piezas del switch "Tu operación / Con Moon Launch". x, y, r = posición regada. */
-export const piezas = [
-  { caos: "Pedido por WhatsApp", orden: "Pedido en 3 toques", icono: iconos.chat, x: 14, y: 26, r: -8, turquesa: false },
-  { caos: "Nota en un papel", orden: "Almacén lo ve al momento", icono: iconos.nota, x: 172, y: 10, r: 6, turquesa: true },
-  { caos: "«Mañana te cotizo»", orden: "Cotización en segundos", icono: iconos.calculadora, x: 104, y: 118, r: -13, turquesa: false },
-  { caos: "«Pregúntale al jefe»", orden: "Aprobación automática", icono: iconos.persona, x: 6, y: 214, r: 9, turquesa: false },
-  { caos: "Caja olvidada", orden: "Entrega revisada", icono: iconos.caja, x: 176, y: 200, r: -5, turquesa: true },
-  { caos: "Cobranza tarde", orden: "Cobro a tiempo", icono: iconos.billete, x: 84, y: 318, r: 11, turquesa: false },
-];
-
-export const dolores = ["Pedidos perdidos en WhatsApp.", "Cotizaciones que tardan un día.", "Todo pasa por ti."];
-
 export const diagnostico = {
   areas: ["Ventas y pedidos", "Inventario", "Cobranza", "Producción", "Atención a clientes", "Administración"],
   herramientas: ["WhatsApp", "Excel o Sheets", "Papel o pizarrón", "Shopify", "Odoo", "Otra"],
@@ -184,21 +172,6 @@ export const simplificamos = [
     herramientas: ["Tu Google Sheets o Excel", "Tableros", "Reportes automáticos"],
   },
 ] as const;
-
-export const niveles = [
-  { titulo: "Excel bien hecho", herr: "Google Sheets · Excel" },
-  { titulo: "Herramientas listas", herr: "WhatsApp Business · Crisp · Odoo" },
-  { titulo: "Automatizaciones", herr: "n8n · Make" },
-  { titulo: "App a la medida", herr: "Suscripción o compra" },
-];
-
-export const preguntasSugeridas = ["¿Cómo dejo Shopify?", "¿App o Excel?", "¿Cuánto cuesta?"];
-
-export const casosMini = [
-  { nombre: "Fábrica de brownies", linea: "Del pizarrón a una app." },
-  { nombre: "Renta de montacargas", linea: "Rentas y equipos en Odoo." },
-  { nombre: "Salón de belleza", linea: "Corte y nómina que se calculan solos." },
-];
 
 export const datos = [
   { valor: "$0", texto: "Diagnóstico de 45 min" },

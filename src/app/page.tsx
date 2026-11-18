@@ -2,11 +2,10 @@ import CalculadoraCaos from "@/components/CalculadoraCaos";
 import Escritorio from "@/components/Escritorio";
 import Header from "@/components/Header";
 import MoonOS from "@/components/MoonOS";
-import OperacionSwitch from "@/components/OperacionSwitch";
 import Simplificamos from "@/components/Simplificamos";
 import SimplificamosBanner from "@/components/SimplificamosBanner";
 import type { CSSProperties } from "react";
-import { datos, dolores, modalidades, waAgendar } from "@/lib/site";
+import { datos, modalidades, waAgendar } from "@/lib/site";
 
 const contenedor = "mx-auto max-w-2xl px-4";
 
@@ -41,20 +40,6 @@ export default function Home() {
         </section>
         <section className="mx-auto hidden max-w-6xl px-6 pt-10 pb-16 lg:block" aria-labelledby="simplificamos-banner">
           <SimplificamosBanner />
-        </section>
-
-        <section className={`${contenedor} flex flex-col gap-[18px] pb-10`} aria-labelledby="te-suena">
-          <h2 id="te-suena" className="titulo-seccion">
-            ¿Te suena?
-          </h2>
-          <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-            {dolores.map((d) => (
-              <li key={d} className="text-[22px] leading-[1.15] font-extrabold tracking-[-0.02em]">
-                {d}
-              </li>
-            ))}
-          </ul>
-          <OperacionSwitch />
         </section>
 
         <section className={`${contenedor} flex flex-col gap-3.5 pb-12`} aria-labelledby="caos">
